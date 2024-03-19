@@ -1,0 +1,70 @@
+{
+  "tournamentId": "1",
+  "name": "pepsi cup",
+  "numberOfOvers": "unlimited",
+  "typeOfPitch": "dry",
+  "players": [
+    {
+      "name": "rishav",
+      "discordId": "",
+      "discordUsername": ""
+    },
+    {
+      "name": "adarsh",
+      "discordId": "",
+      "discordUsername": ""
+    },
+    {
+      "name": "ankit",
+      "discordId": "",
+      "discordUsername": ""
+    }
+  ],
+  "matches": [
+    {
+      "matchId": "1",
+      "firstPlayer": {
+        "name": "rishav",
+        "discordId": "",
+        "discordUsername": ""
+      },
+      "secondPlayer": {
+        "name": "adarsh",
+        "discordId": "",
+        "discordUsername": ""
+      },
+      "pitch": "dry",
+      "status": "NOT_YET_STARTED"
+    },
+    {
+      "matchId": "2",
+      "firstPlayer": {
+        "name": "rishav",
+        "discordId": "",
+        "discordUsername": ""
+      },
+      "secondPlayer": {
+        "name": "ankit",
+        "discordId": "",
+        "discordUsername": ""
+      },
+      "pitch": "dry",
+      "status": "NOT_YET_STARTED"
+    },
+    {
+      "matchId": "3",
+      "firstPlayer": {
+        "name": "adarsh",
+        "discordId": "",
+        "discordUsername": ""
+      },
+      "secondPlayer": {
+        "name": "ankit",
+        "discordId": "",
+        "discordUsername": ""
+      },
+      "pitch": "dry",
+      "status": "NOT_YET_STARTED"
+    }
+  ]
+}
