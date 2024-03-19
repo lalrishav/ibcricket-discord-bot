@@ -1,0 +1,187 @@
+{
+  "tournamentId": "string",
+  "name": "string",
+  "numberOfOvers": "string",
+  "typeOfPitch": "string",
+  "players": [{
+    "name": "",
+    "discordId": "",
+    "discordUsername": ""
+  }],
+  "matches": [
+    {
+      "matchId": "1",
+      "firstPlayer": {
+        "name": "John",
+        "discordId": "123456789",
+        "discordUsername": "john_doe"
+      },
+      "secondPlayer": {
+        "name": "Alice",
+        "discordId": "987654321",
+        "discordUsername": "alice_smith"
+      },
+      "pitch": "Grass",
+      "country": "USA",
+      "battingFirst": {
+        "name": "John",
+        "discordId": "123456789",
+        "discordUsername": "john_doe"
+      },
+      "firstInning": {
+        "inningId": "1",
+        "player": {
+          "name": "John",
+          "discordId": "123456789",
+          "discordUsername": "john_doe"
+        },
+        "runScored": 100,
+        "wicket": 2,
+        "overs": "20",
+        "qpNumber": "345",
+        "startDate": "2024-03-19T00:00:00.000Z"
+      },
+      "secondInning": null,
+      "thirdInning": null,
+      "fourthInning": null,
+      "status": "NOT_YET_STARTED",
+      "startDate": "2024-03-19T00:00:00.000Z",
+      "endDate": null
+    },
+    {
+      "matchId": "2",
+      "firstPlayer": {
+        "name": "Bob",
+        "discordId": "456789123",
+        "discordUsername": "bob_johnson"
+      },
+      "secondPlayer": {
+        "name": "Eve",
+        "discordId": "789123456",
+        "discordUsername": "eve_white"
+      },
+      "pitch": "Clay",
+      "country": "UK",
+      "battingFirst": {
+        "name": "Bob",
+        "discordId": "456789123",
+        "discordUsername": "bob_johnson"
+      },
+      "firstInning": null,
+      "secondInning": null,
+      "thirdInning": null,
+      "fourthInning": null,
+      "status": "IN_PROGRESS",
+      "startDate": "2024-03-19T00:00:00.000Z",
+      "endDate": null
+    },
+    {
+      "matchId": "3",
+      "firstPlayer": {
+        "name": "Charlie",
+        "discordId": "159357852",
+        "discordUsername": "charlie_brown"
+      },
+      "secondPlayer": {
+        "name": "David",
+        "discordId": "258369147",
+        "discordUsername": "david_smith"
+      },
+      "pitch": "AstroTurf",
+      "country": "Canada",
+      "battingFirst": {
+        "name": "David",
+        "discordId": "258369147",
+        "discordUsername": "david_smith"
+      },
+      "firstInning": null,
+      "secondInning": null,
+      "thirdInning": null,
+      "fourthInning": null,
+      "status": "COMPLETED",
+      "startDate": "2024-03-19T00:00:00.000Z",
+      "endDate": null
+    },
+    {
+      "matchId": "4",
+      "firstPlayer": {
+        "name": "Emily",
+        "discordId": "753951486",
+        "discordUsername": "emily_green"
+      },
+      "secondPlayer": {
+        "name": "Frank",
+        "discordId": "951357864",
+        "discordUsername": "frank_blue"
+      },
+      "pitch": "Sand",
+      "country": "Australia",
+      "battingFirst": {
+        "name": "Frank",
+        "discordId": "951357864",
+        "discordUsername": "frank_blue"
+      },
+      "firstInning": null,
+      "secondInning": null,
+      "thirdInning": null,
+      "fourthInning": null,
+      "status": "ABANDONED",
+      "startDate": "2024-03-19T00:00:00.000Z",
+      "endDate": null
+    },
+    {
+      "matchId": "5",
+      "firstPlayer": {
+        "name": "George",
+        "discordId": "654987321",
+        "discordUsername": "george_baker"
+      },
+      "secondPlayer": {
+        "name": "Hannah",
+        "discordId": "852369741",
+        "discordUsername": "hannah_red"
+      },
+      "pitch": "Gravel",
+      "country": "Germany",
+      "battingFirst": {
+        "name": "George",
+        "discordId": "654987321",
+        "discordUsername": "george_baker"
+      },
+      "firstInning": null,
+      "secondInning": null,
+      "thirdInning": null,
+      "fourthInning": null,
+      "status": "TOSS_DONE",
+      "startDate": "2024-03-19T00:00:00.000Z",
+      "endDate": null
+    },
+    {
+      "matchId": "6",
+      "firstPlayer": {
+        "name": "Ivy",
+        "discordId": "147258369",
+        "discordUsername": "ivy_yellow"
+      },
+      "secondPlayer": {
+        "name": "Jack",
+        "discordId": "369852741",
+        "discordUsername": "jack_orange"
+      },
+      "pitch": "Concrete",
+      "country": "France",
+      "battingFirst": {
+        "name": "Ivy",
+        "discordId": "147258369",
+        "discordUsername": "ivy_yellow"
+      },
+      "firstInning": null,
+      "secondInning": null,
+      "thirdInning": null,
+      "fourthInning": null,
+      "status": "NOT_YET_STARTED",
+      "startDate": "2024-03-19T00:00:00.000Z",
+      "endDate": null
+    }
+  ]
+}
