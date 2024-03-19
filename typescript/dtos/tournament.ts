@@ -1,5 +1,6 @@
 import { Match } from "./match"
 import { Player } from "./player"
+import { PointsTable } from "./pointsTable"
 
 export type Tournament = {
     tournamentId: string,
@@ -10,7 +11,8 @@ export type Tournament = {
     matches: Match[],
     startDate?: Date,
     endDate?: Date,
-    status: TournamentStatus
+    status: TournamentStatus,
+    pointsTable?: PointsTable,
 }
 
 export enum TournamentStatus  {

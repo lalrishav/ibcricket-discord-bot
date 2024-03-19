@@ -14,7 +14,8 @@ export type Match = {
     fourthInning?: Inning,
     status: MatchStatusEnum,
     startDate?: Date,
-    endDate?: Date
+    endDate?: Date,
+    result?: MatchResult
 }
 
 export enum MatchStatusEnum {
@@ -24,4 +25,13 @@ export enum MatchStatusEnum {
     ABANDONED = "ABANDONED",
     TOSS_DONE = "TOSS_DONE",
 }
+
+export type MatchResult = {
+    winner: Player,
+    looser: Player,
+    comment: string,
+    bonusPoint: number,
+    isLostByInnings: boolean
+}
+
 
