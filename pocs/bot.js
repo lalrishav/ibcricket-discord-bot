@@ -2,10 +2,10 @@ const { Client, GatewayIntentBits, MessageE } = require("discord.js");
 const { createCanvas } = require("canvas");
 const Chart = require("chart.js");
 const puppeteer = require("puppeteer");
-const { handleSchedule } = require("./commands/schedule");
+const { handleSchedule } = require("../commands/schedule");
 const {
   getTournamentSchedule,
-} = require("./typescript/utility/getTournamentProgress");
+} = require("../typescript/utility/getTournamentProgress");
 
 const client = new Client({
   intents: [
@@ -27,7 +27,7 @@ client.on("messageCreate", async (message) => {
 
   const args = message.content.slice(PREFIX.length).trim().split(/ +/);
   const command = args.shift().toLowerCase();
-  const tournament = require("./mocks/tournament.json");
+  const tournament = require("../mocks/tournament.json");
   if (command === "init_tournament") {
     const filter = (response) => response.author.id === message.author.id;
     await message.channel.send(
@@ -106,6 +106,8 @@ client.on("messageCreate", async (message) => {
 
     // Send the embed as a message
     message.channel.send({ embeds: [embed] });
+  } else if (command.startsWith("startMatch")) {
+    
   }
 });
 

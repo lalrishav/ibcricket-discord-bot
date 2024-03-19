@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const { getTournamentSchedule } = require("../typescript/utility/getTournamentProgress")
 const tournament = require("../mocks/tournament.json")
+var table = require('text-table');
 
 const handleSchedule = (message)=>{
     console.log("handling schedule")
@@ -24,6 +25,6 @@ const handleSchedule = (message)=>{
 
     formattedTable += "```";
 
-    message.channel.send(formattedTable);
+    message.channel.send(table(tableData));
 }
 

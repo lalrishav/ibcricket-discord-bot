@@ -8,6 +8,6 @@ export type Tournament = {
     typeOfPitch: string,
     players: Player[],
     matches: Match[],
-    startDate: Date,
+    startDate?: Date,
     endDate?: Date
 }

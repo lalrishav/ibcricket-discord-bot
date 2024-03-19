@@ -6,22 +6,22 @@ export type Match = {
     firstPlayer: Player,
     secondPlayer: Player,
     pitch: string,
-    country: string,
-    battingFirst: Player,
-    firstInning: Inning,
-    secondInning: Inning,
-    thirdInning: Inning,
-    fourthInning: Inning,
+    country?: string,
+    battingFirst?: Player,
+    firstInning?: Inning,
+    secondInning?: Inning,
+    thirdInning?: Inning,
+    fourthInning?: Inning,
     status: MatchStatusEnum,
-    startDate: Date,
+    startDate?: Date,
     endDate?: Date
 }
 
 export enum MatchStatusEnum {
-    "NOT_YET_STARTED",
-    "IN_PROGRESS",
-    "COMPLETED",
-    "ABANDONED",
-    "TOSS_DONE",
+    NOT_YET_STARTED = "NOT_YET_STARTED",
+    IN_PROGRESS = "IN_PROGRESS",
+    COMPLETED = "COMPLETED",
+    ABANDONED = "ABANDONED",
+    TOSS_DONE = "TOSS_DONE",
 }
 
