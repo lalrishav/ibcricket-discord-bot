@@ -15,12 +15,16 @@ export type Match = {
     status: MatchStatusEnum,
     startDate?: Date,
     endDate?: Date,
-    result?: MatchResult
+    result?: MatchResult,
+    currentInning? : number
 }
 
 export enum MatchStatusEnum {
     NOT_YET_STARTED = "NOT_YET_STARTED",
-    IN_PROGRESS = "IN_PROGRESS",
+    FIRST_INNING_IN_PROGRESS = "FIRST_INNING_IN_PROGRESS",
+    SECOND_INNING_IN_PROGRESS = "SECOND_INNING_IN_PROGRESS",
+    THIRD_INNING_IN_PROGRESS = "THIRD_INNING_IN_PROGRESS",
+    FOURTH_INNING_IN_PROGRESS = "FOURTH_INNING_IN_PROGRESS",
     COMPLETED = "COMPLETED",
     ABANDONED = "ABANDONED",
     TOSS_DONE = "TOSS_DONE",

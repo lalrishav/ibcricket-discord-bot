@@ -5,8 +5,15 @@ export type Inning = {
     player: Player,
     runScored: number,
     wicket: number,
-    overs: string,
+    overs: number,
     qpNumber: string,
     startDate: Date,
     endDate?: Date,
+    status: InningStatus,
+}
+
+export enum InningStatus {
+    NOT_AVAILABLE = "NOT_AVAILABLE",
+    IN_PROGRESS = "IN_PROGRESS",
+    COMPLETED = "COMPLETED"
 }
