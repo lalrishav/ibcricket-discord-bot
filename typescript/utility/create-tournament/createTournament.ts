@@ -1,7 +1,7 @@
-import { Match, MatchStatusEnum } from "../dtos/match";
-import { Player } from "../dtos/player";
-import { Tournament } from "../dtos/tournament";
-import { ReadJsonFile, UpdateJsonFile } from "./file-operation";
+import { Match, MatchStatusEnum } from "../../dtos/match";
+import { Player } from "../../dtos/player";
+import { Tournament, TournamentStatus } from "../../dtos/tournament";
+import { ReadJsonFile, UpdateJsonFile } from "./../file-operation";
 
 export const CreateTournament = (
   name: string,
@@ -18,6 +18,7 @@ export const CreateTournament = (
     typeOfPitch,
     players: players,
     matches: CreateMatches(players, typeOfPitch),
+    status: TournamentStatus.YET_TO_START
   };
   WriteTournament(tournament)
   console.log(tournament);
@@ -25,8 +26,9 @@ export const CreateTournament = (
 
 export const WriteTournament = (tournament: Tournament) => {
   const data = ReadJsonFile("tournament.json")
+  console.log("data is ", data)
   data.push(tournament)
-  UpdateJsonFile("tournament.json", tournament)
+  UpdateJsonFile("tournament.json", data)
 };
 
 

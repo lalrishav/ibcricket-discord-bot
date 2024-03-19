@@ -9,5 +9,12 @@ export type Tournament = {
     players: Player[],
     matches: Match[],
     startDate?: Date,
-    endDate?: Date
+    endDate?: Date,
+    status: TournamentStatus
+}
+
+export enum TournamentStatus  {
+    YET_TO_START = "YET TO START",
+    IN_PROGRESS = "IN PROGRESS",
+    CANCELLED = "CANCELLED"
 }
