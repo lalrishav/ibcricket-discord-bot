@@ -4,6 +4,7 @@ const {
   createTournament,
 } = require("./commands/interactions/create-tournament");
 const { addPlayer } = require("./commands/messages/add-player");
+const {listPlayers} = require("./commands/interactions/list-player");
 
 const client = new Client({
   intents: [
@@ -24,6 +25,9 @@ client.on("interactionCreate", (interaction) => {
   switch (interaction.commandName) {
     case "create-tournament":
       createTournament(interaction);
+      break;
+    case "list-players":
+      listPlayers(interaction);
       break;
     default:
       break;

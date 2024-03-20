@@ -3,3 +3,6 @@
 /remove-players*
 /list-players
 /start-tournament
+
+Todo next -
+/list-players -

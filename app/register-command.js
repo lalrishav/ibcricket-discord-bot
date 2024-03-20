@@ -50,7 +50,8 @@ const commands = [
         required: true,
       },
     ],
-  }
+  },
+  {name: "list-players","description":"list all the players of current tournament"}
 ];
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
