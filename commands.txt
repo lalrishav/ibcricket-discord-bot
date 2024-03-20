@@ -1,0 +1,5 @@
+/create-tournament
+/add-players
+/remove-players*
+/list-players
+/start-tournament

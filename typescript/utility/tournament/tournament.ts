@@ -49,27 +49,23 @@ export const StartTournament = (tournamentId: string) => {
 };
 
 
-export const AddPlayer = (tournamentId: string = "1", players: User[]) => {
-  console.log("players ", players)
-  const tournament = GetTournamentDetails(tournamentId)
-  const playerDetails: Player[] = []
-  players.forEach((item)=>{
-    if (tournament.players.find(i => i.discordId ==  item.id)){
-      return
-    }
-    playerDetails.push({
-      name: item.username,
-      discordId: item.id,
-      discordUsername: item.username
-    })
-  })
-  tournament.players.concat(playerDetails)
-}
 export const AddTournament = (tournament: Tournament) => {
   const data = ReadJsonFile("tournament.json")
   data.push(tournament)
   UpdateJsonFile("tournament.json", data)
 };
+
+export const UpdateTournament = (tournamentId: string, tournament: Tournament)=>{
+  const data = ReadJsonFile("tournament.json")
+  const index = data.findIndex((i: any) => i.tournamentId == tournamentId)
+
+  if(index == -1){
+    throw new Error("no tournament found")
+  }
+
+  data[index] = tournament
+  UpdateJsonFile("tournament.json", data)
+}
 
 
 

@@ -1,18 +1,40 @@
 import { Player } from "../../dtos/player";
-import {GetTournamentDetails} from "../tournament/tournament";
+import {GetTournamentDetails, UpdateTournament} from "../tournament/tournament";
+import {User} from "discord.js";
 
-export const CreatePlayers = (playerString: string[]): Player[] => {
-  const players: Player[] = [];
-  playerString.forEach((item) => {
-    players.push({
-      name: item,
-      discordId: "",
-      discordUsername: "",
-    });
-  });
+export const AddPlayer = (tournamentId: string = "1", players: User[]) => {
+  console.log("players ", players)
+  const tournament = GetTournamentDetails(tournamentId)
+  const playerDetails: Player[] = []
+  players.forEach((item)=>{
+    console.log("hi")
+    if (tournament.players.find(i => i.discordId ==  item.id)){
+      return
+    }
+    playerDetails.push({
+      name: item.username,
+      discordId: item.id,
+      discordUsername: item.username
+    })
+  })
+  console.log("player details are ", tournament.players)
+  tournament.players = tournament.players.concat(playerDetails)
+  console.log("updated tournament after adding player is  ", tournament)
+  UpdateTournament(tournamentId, tournament)
+}
 
-  return players;
-};
+// export const CreatePlayers = (playerString: string[]): Player[] => {
+//   const players: Player[] = [];
+//   playerString.forEach((item) => {
+//     players.push({
+//       name: item,
+//       discordId: "",
+//       discordUsername: "",
+//     });
+//   });
+//
+//   return players;
+// };
 
 export const GetPlayerByTournamentIdAndPlayerId = (
   tournamentId: string,

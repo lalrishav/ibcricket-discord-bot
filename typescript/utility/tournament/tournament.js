@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetNewTournamentId = exports.GetAllTournaments = exports.GetTournamentDetails = exports.AddTournament = exports.AddPlayer = exports.StartTournament = exports.InitiateTournament = void 0;
+exports.GetNewTournamentId = exports.GetAllTournaments = exports.GetTournamentDetails = exports.UpdateTournament = exports.AddTournament = exports.StartTournament = exports.InitiateTournament = void 0;
 const tournament_1 = require("../../dtos/tournament");
 const file_operation_1 = require("../file-operation");
 const pointsTable_1 = require("../pointsTable/pointsTable");
@@ -43,29 +43,22 @@ const StartTournament = (tournamentId) => {
     (0, file_operation_1.UpdateJsonFile)("tournament.json", data);
 };
 exports.StartTournament = StartTournament;
-const AddPlayer = (tournamentId = "1", players) => {
-    console.log("players ", players);
-    const tournament = (0, exports.GetTournamentDetails)(tournamentId);
-    const playerDetails = [];
-    players.forEach((item) => {
-        if (tournament.players.find(i => i.discordId == item.id)) {
-            return;
-        }
-        playerDetails.push({
-            name: item.username,
-            discordId: item.id,
-            discordUsername: item.username
-        });
-    });
-    tournament.players.concat(playerDetails);
-};
-exports.AddPlayer = AddPlayer;
 const AddTournament = (tournament) => {
     const data = (0, file_operation_1.ReadJsonFile)("tournament.json");
     data.push(tournament);
     (0, file_operation_1.UpdateJsonFile)("tournament.json", data);
 };
 exports.AddTournament = AddTournament;
+const UpdateTournament = (tournamentId, tournament) => {
+    const data = (0, file_operation_1.ReadJsonFile)("tournament.json");
+    const index = data.findIndex((i) => i.tournamentId == tournamentId);
+    if (index == -1) {
+        throw new Error("no tournament found");
+    }
+    data[index] = tournament;
+    (0, file_operation_1.UpdateJsonFile)("tournament.json", data);
+};
+exports.UpdateTournament = UpdateTournament;
 const GetTournamentDetails = (tournamentId) => {
     const data = (0, file_operation_1.ReadJsonFile)("tournament.json");
     const index = data.findIndex((_) => _.tournamentId == tournamentId);

@@ -33,7 +33,7 @@ client.on("interactionCreate", (interaction) => {
 client.on("messageCreate", (message) => {
   const content = message.content
   console.log("received msg", content)
-  if (message.toString().startsWith("list-players")) {
+  if (message.toString().startsWith("add-players")) {
     addPlayer(message)
   }
 });

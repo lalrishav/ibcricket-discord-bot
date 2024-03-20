@@ -5,7 +5,18 @@
     "numberOfOvers": "unlimited",
     "typeOfPitch": "bounce",
     "status": "YET TO START",
-    "players": [],
+    "players": [
+      {
+        "name": "lalrishav",
+        "discordId": "433712724753776651",
+        "discordUsername": "lalrishav"
+      },
+      {
+        "name": "ibcricket-bot",
+        "discordId": "1219427646212145204",
+        "discordUsername": "ibcricket-bot"
+      }
+    ],
     "matches": []
   }
 ]
