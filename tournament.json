@@ -46,13 +46,16 @@
             "discordId": "433712724753776651",
             "discordUsername": "lalrishav"
           },
-          "runScored": 0,
-          "wicket": 0,
-          "overs": 0,
+          "runScored": 100,
+          "wicket": 4,
+          "overs": 40,
           "qpNumber": "1222",
           "startDate": "2024-03-20T21:12:23.661Z",
-          "status": "IN_PROGRESS"
-        }
+          "status": "COMPLETED",
+          "endDate": "2024-03-20T21:50:08.689Z",
+          "matchLink": "http://"
+        },
+        "totalOverRemaining": 200
       }
     ],
     "startDate": "2024-03-20T18:26:07.963Z",

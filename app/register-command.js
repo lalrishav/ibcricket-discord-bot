@@ -118,7 +118,35 @@ const commands = [
                 required: true,
             },
         ]
-    }
+    },
+    {
+        name: "end-inning", "description": "end your innings" , options: [
+            {
+                name: "run_scored",
+                description: "Enter your run scored",
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: "number_of_overs_played",
+                description: "Enter your number of overs played",
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: "number_of_wickets",
+                description: "Enter your number of wickets",
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: "match_link",
+                description: "Enter your matchLink",
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            }
+        ]
+    },
 ];
 
 const rest = new REST({version: "10"}).setToken(process.env.TOKEN);

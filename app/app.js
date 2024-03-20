@@ -13,6 +13,7 @@ const {takeWebpageScreenshot} = require("../app/utils/takeScreenshot")
 const {getFixture} = require("./commands/interactions/fixture");
 const {startMatch} = require("./commands/interactions/start-match");
 const {startInning} = require("./commands/interactions/start-inning");
+const {endInnings} = require("./commands/interactions/end-innings");
 
 const appEmitter = new EventEmitter();
 
@@ -60,6 +61,9 @@ client.on("interactionCreate", async (interaction) => {
       break;
     case "start-inning":
       await startInning(interaction)
+      break;
+    case "end-inning":
+      await endInnings(interaction)
       break;
     default:
       break;

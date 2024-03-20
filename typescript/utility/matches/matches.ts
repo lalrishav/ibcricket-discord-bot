@@ -82,6 +82,7 @@ export const StartMatch = (
         match.status = MatchStatusEnum.INITIATED;
         match.startDate = new Date();
         match.currentInning = 0
+        match.totalOverRemaining = 240
         UpdateMatch(tournament, match)
         return match
     } else {

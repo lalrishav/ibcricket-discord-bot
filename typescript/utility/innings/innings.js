@@ -1,7 +1,7 @@
 "use strict";
 //start match will start the first innings automatically
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StartInning = exports.CreateInnings = void 0;
+exports.EndInnings = exports.StartInning = exports.CreateInnings = void 0;
 const inning_1 = require("../../dtos/inning");
 const matches_1 = require("../matches/matches");
 const players_1 = require("../players/players");
@@ -28,7 +28,7 @@ const StartInning = (matchId, team, stadium, qpNumber, playerId, tournamentId = 
         throw new Error("Only players of this match are allowed to start innings");
     }
     if (((_a = match.firstInning) === null || _a === void 0 ? void 0 : _a.status) == inning_1.InningStatus.IN_PROGRESS || ((_b = match.secondInning) === null || _b === void 0 ? void 0 : _b.status) == inning_1.InningStatus.IN_PROGRESS || ((_c = match.thirdInning) === null || _c === void 0 ? void 0 : _c.status) == inning_1.InningStatus.IN_PROGRESS || ((_d = match.fourthInning) === null || _d === void 0 ? void 0 : _d.status) == inning_1.InningStatus.IN_PROGRESS) {
-        throw new Error(`${match.currentInning} is still in progress`);
+        throw new Error(`Inning ${match.currentInning} is still in progress`);
     }
     if (match.currentInning == 4) {
         throw new Error("match is already completed");
@@ -37,7 +37,7 @@ const StartInning = (matchId, team, stadium, qpNumber, playerId, tournamentId = 
     let keyword = "";
     switch (match.currentInning) {
         case 1:
-            match.firstInning = getFirstInnings(qpNumber, playerId, tournamentId);
+            match.firstInning = getFirstInnings(qpNumber, playerId, team, tournamentId);
             break;
         case 2:
             keyword = "secondInning";
@@ -53,7 +53,52 @@ const StartInning = (matchId, team, stadium, qpNumber, playerId, tournamentId = 
     return match;
 };
 exports.StartInning = StartInning;
-const getFirstInnings = (qpNumber, playerId, tournamentId = "1") => {
+const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tournamentId = "1") => {
+    var _a, _b, _c, _d;
+    const tournament = (0, tournament_1.GetTournamentDetails)(tournamentId);
+    const match = (0, matches_1.GetMatchDetails)(tournament, matchId);
+    if (match.firstPlayer.discordId != playerId && match.secondPlayer.discordId != playerId) {
+        throw new Error("Only players of this match are allowed to start innings");
+    }
+    if (((_a = match.firstInning) === null || _a === void 0 ? void 0 : _a.status) != inning_1.InningStatus.IN_PROGRESS && ((_b = match.secondInning) === null || _b === void 0 ? void 0 : _b.status) != inning_1.InningStatus.IN_PROGRESS && ((_c = match.thirdInning) === null || _c === void 0 ? void 0 : _c.status) != inning_1.InningStatus.IN_PROGRESS && ((_d = match.fourthInning) === null || _d === void 0 ? void 0 : _d.status) == inning_1.InningStatus.IN_PROGRESS) {
+        throw new Error(`No innings to end`);
+    }
+    if (match.currentInning == 4) {
+        throw new Error("match is already completed");
+    }
+    let keyword = "";
+    switch (match.currentInning) {
+        case 1:
+            const firstInning = match.firstInning;
+            if (firstInning) {
+                firstInning.status = inning_1.InningStatus.COMPLETED;
+                firstInning.endDate = new Date();
+                firstInning.overs = Number(overs);
+                firstInning.runScored = Number(score);
+                firstInning.wicket = Number(wicket);
+                firstInning.matchLink = matchLink;
+                match.firstInning = firstInning;
+                match.totalOverRemaining = match.totalOverRemaining || 240 - Number(overs);
+                if (match.totalOverRemaining < 0) {
+                    throw new Error("you crossed the maximum over");
+                }
+                (0, matches_1.UpdateMatch)(tournament, match);
+                return { match: match, innings: firstInning };
+            }
+            break;
+        case 2:
+            keyword = "secondInning";
+            break;
+        case 3:
+            keyword = "thirdInning";
+            break;
+        case 4:
+            keyword = "fourthInning";
+            break;
+    }
+};
+exports.EndInnings = EndInnings;
+const getFirstInnings = (qpNumber, playerId, team, tournamentId = "1") => {
     const player = (0, players_1.GetPlayerByTournamentIdAndPlayerId)(tournamentId, playerId);
     return {
         inningId: "1",

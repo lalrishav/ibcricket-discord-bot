@@ -15,7 +15,8 @@ export type Match = {
     startDate?: Date,
     endDate?: Date,
     result?: MatchResult,
-    currentInning? : number
+    currentInning? : number,
+    totalOverRemaining?: number,
 }
 
 export enum MatchStatusEnum {

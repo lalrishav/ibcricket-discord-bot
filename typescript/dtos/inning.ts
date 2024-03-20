@@ -10,6 +10,8 @@ export type Inning = {
     startDate: Date,
     endDate?: Date,
     status: InningStatus,
+    matchLink?: string,
+    country?: string
 }
 
 export enum InningStatus {

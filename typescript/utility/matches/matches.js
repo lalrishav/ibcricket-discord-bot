@@ -67,6 +67,7 @@ const StartMatch = (matchId, playerId, tournamentId = "1") => {
         match.status = match_1.MatchStatusEnum.INITIATED;
         match.startDate = new Date();
         match.currentInning = 0;
+        match.totalOverRemaining = 240;
         (0, exports.UpdateMatch)(tournament, match);
         return match;
     }
