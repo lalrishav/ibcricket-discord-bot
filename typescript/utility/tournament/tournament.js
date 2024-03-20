@@ -26,7 +26,7 @@ const InitiateTournament = (name, numberOfOvers, typeOfPitch) => {
 exports.InitiateTournament = InitiateTournament;
 const start = (tournamentId) => {
     const data = (0, file_operation_1.ReadJsonFile)("tournament.json");
-    const index = data.findIndex((_) => _.tournamentId == tournamentId);
+    const index = data.findIndex((_) => _.tournamentId == tournamentId && _.status == tournament_1.TournamentStatus.YET_TO_START);
     if (index < 0) {
         throw new Error("No tournament found");
     }

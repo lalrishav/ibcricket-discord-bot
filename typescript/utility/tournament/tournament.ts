@@ -1,5 +1,5 @@
-import { Tournament, TournamentStatus } from "../../dtos/tournament";
-import { ReadJsonFile, UpdateJsonFile } from "../file-operation";
+import {Tournament, TournamentStatus} from "../../dtos/tournament";
+import {ReadJsonFile, UpdateJsonFile} from "../file-operation";
 import {InitatePointsTable} from "../pointsTable/pointsTable";
 import {InitiateMatches} from "../matches/matches";
 
@@ -29,7 +29,7 @@ export const InitiateTournament = (
 
 export const start = (tournamentId: string): Tournament => {
   const data: Tournament[] = ReadJsonFile("tournament.json") as Tournament[];
-  const index = data.findIndex((_) => _.tournamentId == tournamentId);
+  const index = data.findIndex((_) => _.tournamentId == tournamentId && _.status == TournamentStatus.YET_TO_START);
   if (index < 0) {
     throw new Error("No tournament found")
   } else {
