@@ -1,9 +1,7 @@
-import { User } from "discord.js";
-import { Match, MatchStatusEnum } from "../../dtos/match";
-import { Player } from "../../dtos/player";
 import { Tournament, TournamentStatus } from "../../dtos/tournament";
 import { ReadJsonFile, UpdateJsonFile } from "../file-operation";
 import {InitatePointsTable} from "../pointsTable/pointsTable";
+import {InitiateMatches} from "../matches/matches";
 
 export const InitiateTournament = (
   name: string,
@@ -29,14 +27,14 @@ export const InitiateTournament = (
   return latestTournamentId
 }
 
-export const StartTournament = (tournamentId: string) => {
+export const start = (tournamentId: string) => {
   const data: Tournament[] = ReadJsonFile("tournament.json") as Tournament[];
   const index = data.findIndex((_) => _.tournamentId == tournamentId);
   if (index < 0) {
-    //todo error no tournament found
-    console.error("No tournament found");
+    throw new Error("No tournament found")
   } else {
     const pointsTable = InitatePointsTable(data[index].players);
+    const matches = InitiateMatches(data[index].players, data[index].typeOfPitch)
     if (data[index].status != TournamentStatus.YET_TO_START) {
       //todo: return can not start tournament create a new one
       console.log("can not start tournament create a new one");
@@ -44,6 +42,7 @@ export const StartTournament = (tournamentId: string) => {
     data[index].startDate = new Date();
     data[index].status = TournamentStatus.IN_PROGRESS;
     data[index].pointsTable = pointsTable;
+    data[index].matches = matches
   }
   UpdateJsonFile("tournament.json", data);
 };

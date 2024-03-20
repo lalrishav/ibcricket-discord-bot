@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetNewTournamentId = exports.GetAllTournaments = exports.GetTournamentDetails = exports.UpdateTournament = exports.AddTournament = exports.StartTournament = exports.InitiateTournament = void 0;
+exports.GetNewTournamentId = exports.GetAllTournaments = exports.GetTournamentDetails = exports.UpdateTournament = exports.AddTournament = exports.start = exports.InitiateTournament = void 0;
 const tournament_1 = require("../../dtos/tournament");
 const file_operation_1 = require("../file-operation");
 const pointsTable_1 = require("../pointsTable/pointsTable");
+const matches_1 = require("../matches/matches");
 const InitiateTournament = (name, numberOfOvers, typeOfPitch) => {
     const latestTournamentId = (0, exports.GetNewTournamentId)();
     if (latestTournamentId != "1") {
@@ -23,15 +24,15 @@ const InitiateTournament = (name, numberOfOvers, typeOfPitch) => {
     return latestTournamentId;
 };
 exports.InitiateTournament = InitiateTournament;
-const StartTournament = (tournamentId) => {
+const start = (tournamentId) => {
     const data = (0, file_operation_1.ReadJsonFile)("tournament.json");
     const index = data.findIndex((_) => _.tournamentId == tournamentId);
     if (index < 0) {
-        //todo error no tournament found
-        console.error("No tournament found");
+        throw new Error("No tournament found");
     }
     else {
         const pointsTable = (0, pointsTable_1.InitatePointsTable)(data[index].players);
+        const matches = (0, matches_1.InitiateMatches)(data[index].players, data[index].typeOfPitch);
         if (data[index].status != tournament_1.TournamentStatus.YET_TO_START) {
             //todo: return can not start tournament create a new one
             console.log("can not start tournament create a new one");
@@ -39,10 +40,11 @@ const StartTournament = (tournamentId) => {
         data[index].startDate = new Date();
         data[index].status = tournament_1.TournamentStatus.IN_PROGRESS;
         data[index].pointsTable = pointsTable;
+        data[index].matches = matches;
     }
     (0, file_operation_1.UpdateJsonFile)("tournament.json", data);
 };
-exports.StartTournament = StartTournament;
+exports.start = start;
 const AddTournament = (tournament) => {
     const data = (0, file_operation_1.ReadJsonFile)("tournament.json");
     data.push(tournament);

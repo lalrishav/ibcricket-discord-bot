@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StartMatch = exports.GetMatchDetails = exports.GetMatchesByTournamentIdAndPlayerId = exports.GetMatchesByTournamentId = exports.CreateMatches = void 0;
+exports.StartMatch = exports.GetMatchDetails = exports.GetMatchesByTournamentIdAndPlayerId = exports.GetMatchesByTournamentId = exports.InitiateMatches = void 0;
 const match_1 = require("../../dtos/match");
 const validator_1 = require("../../validators/validator");
 const innings_1 = require("../innings/innings");
 const players_1 = require("../players/players");
 const tournament_1 = require("../tournament/tournament");
-const CreateMatches = (players, pitch) => {
+const InitiateMatches = (players, pitch) => {
     const numPlayers = players.length;
     const matches = [];
     let index = 1;
@@ -24,7 +24,7 @@ const CreateMatches = (players, pitch) => {
     }
     return matches;
 };
-exports.CreateMatches = CreateMatches;
+exports.InitiateMatches = InitiateMatches;
 const GetMatchesByTournamentId = (tournamentId) => {
     const tournament = (0, tournament_1.GetTournamentDetails)(tournamentId);
     return tournament.matches;

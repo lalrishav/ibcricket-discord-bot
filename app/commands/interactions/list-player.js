@@ -3,9 +3,9 @@ const {GetPlayerByTournamentId} = require("../../../typescript/utility/players/p
 const listPlayers = (interaction)=>{
     try {
         const players = GetPlayerByTournamentId()
-        const usernames = players.map(item => item.discordUsername);
-        const userMentionsByUsername = usernames.map(username => `@${username}`).join(' ');
-        interaction.reply(`Hey  ${userMentionsByUsername}, check this out!`);
+        const usernames = players.map(item => item.discordId);
+        const userMentionsByUsername = usernames.map(username => `<@${username}>`).join(' ');
+        interaction.reply(`Player list:   ${userMentionsByUsername}`);
     }catch (e) {
         console.log(e)
         //todo

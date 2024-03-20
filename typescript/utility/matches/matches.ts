@@ -5,7 +5,7 @@ import { CreateInnings } from "../innings/innings";
 import { GetPlayerByTournamentIdAndPlayerId } from "../players/players";
 import {GetTournamentDetails} from "../tournament/tournament";
 
-export const CreateMatches = (players: Player[], pitch: string): Match[] => {
+export const InitiateMatches = (players: Player[], pitch: string): Match[] => {
   const numPlayers = players.length;
   const matches: Match[] = [];
   let index = 1;

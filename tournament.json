@@ -4,7 +4,7 @@
     "name": "pepsi cup",
     "numberOfOvers": "unlimited",
     "typeOfPitch": "bounce",
-    "status": "YET TO START",
+    "status": "IN PROGRESS",
     "players": [
       {
         "name": "lalrishav",
@@ -17,6 +17,67 @@
         "discordUsername": "ibcricket-bot"
       }
     ],
-    "matches": []
+    "matches": [
+      {
+        "matchId": "1",
+        "firstPlayer": {
+          "name": "lalrishav",
+          "discordId": "433712724753776651",
+          "discordUsername": "lalrishav"
+        },
+        "secondPlayer": {
+          "name": "ibcricket-bot",
+          "discordId": "1219427646212145204",
+          "discordUsername": "ibcricket-bot"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      }
+    ],
+    "startDate": "2024-03-20T02:22:56.951Z",
+    "pointsTable": {
+      "lalrishav": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "ibcricket-bot": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      }
+    }
   }
 ]

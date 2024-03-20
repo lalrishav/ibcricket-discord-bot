@@ -1,9 +1,13 @@
-import { Player } from "../../dtos/player";
+import {Player} from "../../dtos/player";
 import {GetTournamentDetails, UpdateTournament} from "../tournament/tournament";
 import {User} from "discord.js";
+import {TournamentStatus} from "../../dtos/tournament";
 
 export const AddPlayer = (tournamentId: string = "1", players: User[]) => {
   const tournament = GetTournamentDetails(tournamentId)
+  if(tournament.status != TournamentStatus.YET_TO_START) {
+    throw new Error("tournament already started, you can not add new players")
+  }
   const playerDetails: Player[] = []
   players.forEach((item)=>{
     if (tournament.players.find(i => i.discordId ==  item.id)){
