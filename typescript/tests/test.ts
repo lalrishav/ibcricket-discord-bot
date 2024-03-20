@@ -1,4 +1,4 @@
-const {CreateTournament} = require("../utility/create-tournament/createTournament")
+const {CreateTournament} = require("../utility/tournament/tournament")
 const {StartTournament} = require("../utility/start-tournament/startTournament")
 
 const CustomTest = ()=>{

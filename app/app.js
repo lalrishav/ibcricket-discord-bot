@@ -2,7 +2,8 @@ require("dotenv").config();
 const { Client, IntentsBitField } = require("discord.js");
 const {
   createTournament,
-} = require("./handlers/interactions/create-tournament");
+} = require("./commands/interactions/create-tournament");
+const { addPlayer } = require("./commands/messages/add-player");
 
 const client = new Client({
   intents: [
@@ -19,10 +20,21 @@ client.on("ready", (c) => {
 
 client.on("interactionCreate", (interaction) => {
   if (!interaction.isChatInputCommand()) return;
-
   console.log(interaction.commandName);
-  if (interaction.commandName === "create-tournament") {
-    createTournament(interaction);
+  switch (interaction.commandName) {
+    case "create-tournament":
+      createTournament(interaction);
+      break;
+    default:
+      break;
+  }
+});
+
+client.on("messageCreate", (message) => {
+  const content = message.content
+  console.log("received msg", content)
+  if (message.toString().startsWith("list-players")) {
+    addPlayer(message)
   }
 });
 

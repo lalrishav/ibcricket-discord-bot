@@ -3,7 +3,27 @@ import { Player } from "../../dtos/player";
 import { DoPlayerBelongToMatch } from "../../validators/validator";
 import { CreateInnings } from "../innings/innings";
 import { GetPlayerByTournamentIdAndPlayerId } from "../players/players";
-import { GetTournamentDetails } from "../start-tournament/startTournament";
+import {GetTournamentDetails} from "../tournament/tournament";
+
+export const CreateMatches = (players: Player[], pitch: string): Match[] => {
+  const numPlayers = players.length;
+  const matches: Match[] = [];
+  let index = 1;
+  for (let i = 0; i < numPlayers; i++) {
+    for (let j = i + 1; j < numPlayers; j++) {
+      matches.push({
+        matchId: index.toString(),
+        firstPlayer: players[i],
+        secondPlayer: players[j],
+        pitch: pitch,
+        status: MatchStatusEnum.NOT_YET_STARTED,
+      });
+
+      index++;
+    }
+  }
+  return matches;
+};
 
 export const GetMatchesByTournamentId = (tournamentId: string): Match[] => {
   const tournament = GetTournamentDetails(tournamentId);
@@ -48,17 +68,19 @@ export const StartMatch = (
   qpNumber: string
 ) => {
   const match = GetMatchDetails(tournamentId, matchId);
-  const battingFirstDiscordId = playerId;
-  const battingfirstPlayer: Player = GetPlayerByTournamentIdAndPlayerId(
+  let battingFirstDiscordId: string;
+  battingFirstDiscordId = playerId;
+  const battingFirstPlayer: Player = GetPlayerByTournamentIdAndPlayerId(
     tournamentId,
     battingFirstDiscordId
   );
 
   if (DoPlayerBelongToMatch(match, playerId)) {
-    match.battingFirst = battingfirstPlayer;
+    match.battingFirst = battingFirstPlayer;
     match.status = MatchStatusEnum.FIRST_INNING_IN_PROGRESS;
-    (match.country = country), (match.startDate = new Date());
-    match.firstInning = CreateInnings(qpNumber, battingfirstPlayer);
+    match.country = country
+    match.startDate = new Date();
+    match.firstInning = CreateInnings(qpNumber, battingFirstPlayer);
     match.currentInning = 1
   } else {
     //todo

@@ -3,95 +3,9 @@
     "tournamentId": "1",
     "name": "pepsi cup",
     "numberOfOvers": "unlimited",
-    "typeOfPitch": "dry",
-    "players": [
-      {
-        "name": "rishav",
-        "discordId": "",
-        "discordUsername": ""
-      },
-      {
-        "name": "adarsh",
-        "discordId": "",
-        "discordUsername": ""
-      },
-      {
-        "name": "ankit",
-        "discordId": "",
-        "discordUsername": ""
-      }
-    ],
-    "matches": [
-      {
-        "matchId": "1",
-        "firstPlayer": {
-          "name": "rishav",
-          "discordId": "",
-          "discordUsername": ""
-        },
-        "secondPlayer": {
-          "name": "adarsh",
-          "discordId": "",
-          "discordUsername": ""
-        },
-        "pitch": "dry",
-        "status": "NOT_YET_STARTED"
-      },
-      {
-        "matchId": "2",
-        "firstPlayer": {
-          "name": "rishav",
-          "discordId": "",
-          "discordUsername": ""
-        },
-        "secondPlayer": {
-          "name": "ankit",
-          "discordId": "",
-          "discordUsername": ""
-        },
-        "pitch": "dry",
-        "status": "NOT_YET_STARTED"
-      },
-      {
-        "matchId": "3",
-        "firstPlayer": {
-          "name": "adarsh",
-          "discordId": "",
-          "discordUsername": ""
-        },
-        "secondPlayer": {
-          "name": "ankit",
-          "discordId": "",
-          "discordUsername": ""
-        },
-        "pitch": "dry",
-        "status": "NOT_YET_STARTED"
-      }
-    ],
-    "status": "IN PROGRESS",
-    "startDate": "2024-03-19T18:32:31.231Z",
-    "pointsTable": {
-      "": {
-        "totalMatchesPlayed": 0,
-        "totalInningsPlayed": 0,
-        "totalMatchesWin": 0,
-        "totalMatchesLost": 0,
-        "totalMatchesDrawn": 0,
-        "winPoints": 0,
-        "bonusPoints": 0,
-        "totalPoints": 0,
-        "totalRuns": 0,
-        "totalWickets": 0,
-        "totalOver": 0,
-        "average": 0,
-        "opponentRuns": 0,
-        "opponentOvers": 0,
-        "opponentWicket": 0,
-        "runRate": 0,
-        "strikeRate": 0,
-        "averageOverPerInnings": 0,
-        "maxScorePossible": 0
-      }
-    }
+    "typeOfPitch": "bounce",
+    "status": "YET TO START",
+    "players": [],
+    "matches": []
   }
 ]

@@ -1,5 +1,18 @@
 import { Player } from "../../dtos/player";
-import { GetTournamentDetails } from "../start-tournament/startTournament";
+import {GetTournamentDetails} from "../tournament/tournament";
+
+export const CreatePlayers = (playerString: string[]): Player[] => {
+  const players: Player[] = [];
+  playerString.forEach((item) => {
+    players.push({
+      name: item,
+      discordId: "",
+      discordUsername: "",
+    });
+  });
+
+  return players;
+};
 
 export const GetPlayerByTournamentIdAndPlayerId = (
   tournamentId: string,

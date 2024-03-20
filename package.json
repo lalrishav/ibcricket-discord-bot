@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "dev": "tsc --project ./typescript && node app/app.js"
+  },
+  "dependencies": {
+    "@discordjs/rest": "^2.2.0",
+    "canvas": "^2.11.2",
+    "chart.js": "^4.4.2",
+    "discord-api-types": "^0.37.75",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.4.5",
+    "puppeteer": "^22.5.0",
+    "text-table": "^0.2.0"
+  }
+}

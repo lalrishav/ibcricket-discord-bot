@@ -7,8 +7,7 @@ export const ReadJsonFile = (filePath: string): any => {
         const jsonData = fs.readFileSync(filePath, 'utf-8');
         return JSON.parse(jsonData)
     }catch {
-        return []
-        //todo
+        throw new Error("internal server error")
     }
     
 };
@@ -17,7 +16,7 @@ export const UpdateJsonFile = (filePath: string, data: any) => {
     try {
         fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
     }catch {
-        //todo
+        throw new Error("internal server error")
     }
 
 };

@@ -16,14 +16,14 @@ const rest = new REST({ version: '9' }).setToken('MTIxOTQyNzY0NjIxMjE0NTIwNA.GrW
 
 (async () => {
     try {
-            console.log('Started refreshing application (/) commands globally.');
+            console.log('Started refreshing application (/) utils globally.');
             await rest.put(
                 Routes.applicationCommands(clientId),
                 { body: commands },
             );
         
 
-        console.log('Successfully registered application (/) commands.');
+        console.log('Successfully registered application (/) utils.');
     } catch (error) {
         console.error(error);
     }

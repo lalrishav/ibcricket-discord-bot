@@ -4,7 +4,8 @@ exports.InitatePointsTable = void 0;
 const InitatePointsTable = (players) => {
     const pointsTable = {};
     players.forEach((player) => {
-        pointsTable[player.discordId] = InitateEmptyPointsInfo();
+        //todo change name to discord id
+        pointsTable[player.name] = InitateEmptyPointsInfo();
     });
     return pointsTable;
 };
