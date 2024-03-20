@@ -20,7 +20,7 @@ export const AddPlayer = (tournamentId: string = "1", players: User[]) => {
     })
   })
   tournament.players = tournament.players.concat(playerDetails)
-  UpdateTournament(tournamentId, tournament)
+  UpdateTournament(tournament)
 }
 
 export const CreatePlayers = (playerString: string[]): Player[] => {

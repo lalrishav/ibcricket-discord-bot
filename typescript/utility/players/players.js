@@ -20,7 +20,7 @@ const AddPlayer = (tournamentId = "1", players) => {
         });
     });
     tournament.players = tournament.players.concat(playerDetails);
-    (0, tournament_1.UpdateTournament)(tournamentId, tournament);
+    (0, tournament_1.UpdateTournament)(tournament);
 };
 exports.AddPlayer = AddPlayer;
 const CreatePlayers = (playerString) => {

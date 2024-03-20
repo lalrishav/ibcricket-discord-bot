@@ -31,7 +31,13 @@
           "discordUsername": "ibcricket-bot"
         },
         "pitch": "bounce",
-        "status": "NOT_YET_STARTED"
+        "status": "INITIATED",
+        "battingFirst": {
+          "name": "lalrishav",
+          "discordId": "433712724753776651",
+          "discordUsername": "lalrishav"
+        },
+        "startDate": "2024-03-20T19:37:10.940Z"
       }
     ],
     "startDate": "2024-03-20T18:26:07.963Z",

@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StartMatch = exports.GetMatchDetails = exports.GetMatchesByTournamentIdAndPlayerId = exports.GetMatchesByTournamentId = exports.InitiateMatches = void 0;
 const match_1 = require("../../dtos/match");
 const validator_1 = require("../../validators/validator");
-const innings_1 = require("../innings/innings");
 const players_1 = require("../players/players");
 const tournament_1 = require("../tournament/tournament");
 const InitiateMatches = (players, pitch) => {
@@ -42,8 +41,7 @@ const GetMatchesByTournamentIdAndPlayerId = (tournamentId, playerId) => {
     return playerMatch;
 };
 exports.GetMatchesByTournamentIdAndPlayerId = GetMatchesByTournamentIdAndPlayerId;
-const GetMatchDetails = (tournamentId, matchId) => {
-    const tournament = (0, tournament_1.GetTournamentDetails)(tournamentId);
+const GetMatchDetails = (tournament, matchId) => {
     const matches = tournament.matches;
     const index = matches.findIndex((item) => item.matchId == matchId);
     if (index != -1) {
@@ -55,20 +53,31 @@ const GetMatchDetails = (tournamentId, matchId) => {
     }
 };
 exports.GetMatchDetails = GetMatchDetails;
-const StartMatch = (tournamentId, matchId, playerId, country, qpNumber) => {
-    const match = (0, exports.GetMatchDetails)(tournamentId, matchId);
+const StartMatch = (matchId, playerId, tournamentId = "1") => {
+    const tournament = (0, tournament_1.GetTournamentDetails)(tournamentId);
+    const match = (0, exports.GetMatchDetails)(tournament, matchId);
+    if (match.status != match_1.MatchStatusEnum.NOT_YET_STARTED) {
+        throw new Error("match is already started");
+    }
     let battingFirstDiscordId;
     battingFirstDiscordId = playerId;
     const battingFirstPlayer = (0, players_1.GetPlayerByTournamentIdAndPlayerId)(tournamentId, battingFirstDiscordId);
     if ((0, validator_1.DoPlayerBelongToMatch)(match, playerId)) {
         match.battingFirst = battingFirstPlayer;
-        match.status = match_1.MatchStatusEnum.FIRST_INNING_IN_PROGRESS;
-        match.country = country;
+        match.status = match_1.MatchStatusEnum.INITIATED;
         match.startDate = new Date();
-        match.firstInning = (0, innings_1.CreateInnings)(qpNumber, battingFirstPlayer);
-        match.currentInning = 1;
+        const index = tournament.matches.findIndex(item => item.matchId === matchId);
+        if (index !== -1) {
+            tournament.matches[index] = match;
+            (0, tournament_1.UpdateTournament)(tournament);
+            return match;
+        }
+        else {
+            throw new Error("something went wrong");
+        }
     }
     else {
+        throw new Error("only player belong to this match can start");
         //todo
     }
 };

@@ -52,9 +52,9 @@ const AddTournament = (tournament) => {
     (0, file_operation_1.UpdateJsonFile)("tournament.json", data);
 };
 exports.AddTournament = AddTournament;
-const UpdateTournament = (tournamentId, tournament) => {
+const UpdateTournament = (tournament) => {
     const data = (0, file_operation_1.ReadJsonFile)("tournament.json");
-    const index = data.findIndex((i) => i.tournamentId == tournamentId);
+    const index = data.findIndex((i) => i.tournamentId == tournament.tournamentId);
     if (index == -1) {
         throw new Error("no tournament found");
     }

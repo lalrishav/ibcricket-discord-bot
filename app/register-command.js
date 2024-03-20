@@ -57,6 +57,15 @@ const commands = [
     },
     {
         name: "fixtures", "description": "get fixtures"
+    },
+    {
+        name: "start-match", "description": "get fixtures" , options: [
+            {
+                name: "match_id",
+                description: "Match id, get it by using /fixtures",
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            }]
     }
 ];
 

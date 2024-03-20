@@ -11,6 +11,7 @@ const {GetFixtures} = require("../typescript/utility/fixtures/fixture");
 const {getFixtureTable} = require("../app/utils/renderTable")
 const {takeWebpageScreenshot} = require("../app/utils/takeScreenshot")
 const {getFixture} = require("./commands/interactions/fixture");
+const {startMatch} = require("./commands/interactions/start-match");
 
 const appEmitter = new EventEmitter();
 
@@ -52,6 +53,9 @@ client.on("interactionCreate", async (interaction) => {
       break;
     case "fixtures":
       await getFixture(interaction)
+      break;
+    case "start-match":
+      await startMatch(client, interaction)
       break;
     default:
       break;
