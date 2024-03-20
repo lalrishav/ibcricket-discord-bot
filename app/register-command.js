@@ -53,14 +53,10 @@ const commands = [
     },
     {name: "list-players", "description": "list all the players of current tournament"},
     {
-        name: "start-tournament", "description": "start your tournament", options: [
-            {
-                name: "tournament_id",
-                description: "Enter the tournament id to start",
-                type: ApplicationCommandOptionType.String,
-                required: true,
-            },
-        ],
+        name: "start-tournament", "description": "start your tournament"
+    },
+    {
+        name: "fixtures", "description": "get fixtures"
     }
 ];
 

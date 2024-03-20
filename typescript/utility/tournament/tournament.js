@@ -43,6 +43,7 @@ const start = (tournamentId) => {
         data[index].matches = matches;
     }
     (0, file_operation_1.UpdateJsonFile)("tournament.json", data);
+    return data[index];
 };
 exports.start = start;
 const AddTournament = (tournament) => {

@@ -27,7 +27,7 @@ export const InitiateTournament = (
   return latestTournamentId
 }
 
-export const start = (tournamentId: string) => {
+export const start = (tournamentId: string): Tournament => {
   const data: Tournament[] = ReadJsonFile("tournament.json") as Tournament[];
   const index = data.findIndex((_) => _.tournamentId == tournamentId);
   if (index < 0) {
@@ -45,6 +45,7 @@ export const start = (tournamentId: string) => {
     data[index].matches = matches
   }
   UpdateJsonFile("tournament.json", data);
+  return data[index]
 };
 
 
