@@ -12,6 +12,7 @@ const {getFixtureTable} = require("../app/utils/renderTable")
 const {takeWebpageScreenshot} = require("../app/utils/takeScreenshot")
 const {getFixture} = require("./commands/interactions/fixture");
 const {startMatch} = require("./commands/interactions/start-match");
+const {startInning} = require("./commands/interactions/start-inning");
 
 const appEmitter = new EventEmitter();
 
@@ -56,6 +57,9 @@ client.on("interactionCreate", async (interaction) => {
       break;
     case "start-match":
       await startMatch(client, interaction)
+      break;
+    case "start-inning":
+      await startInning(interaction)
       break;
     default:
       break;

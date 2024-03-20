@@ -6,7 +6,6 @@ export type Match = {
     firstPlayer: Player,
     secondPlayer: Player,
     pitch: string,
-    country?: string,
     battingFirst?: Player,
     firstInning?: Inning,
     secondInning?: Inning,

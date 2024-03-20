@@ -66,6 +66,58 @@ const commands = [
                 type: ApplicationCommandOptionType.String,
                 required: true,
             }]
+    },
+    {
+        name: "start-inning", "description": "start innings" , options: [
+            {
+                name: "country",
+                description:
+                    "select a country to play against",
+                type: ApplicationCommandOptionType.String,
+                choices: [
+                    {
+                        name: "eng",
+                        value: "eng",
+                    },
+                    {
+                        name: "aus",
+                        value: "aus",
+                    },
+                    {
+                        name: "wi",
+                        value: "wi",
+                    },
+                ],
+                required: true,
+            },
+            {
+                name: "stadium",
+                description:
+                    "select a stadium to play in",
+                type: ApplicationCommandOptionType.String,
+                choices: [
+                    {
+                        name: "1",
+                        value: "1",
+                    },
+                    {
+                        name: "2",
+                        value: "2",
+                    },
+                    {
+                        name: "3",
+                        value: "3",
+                    },
+                ],
+                required: true,
+            },
+            {
+                name: "qp_number",
+                description: "Enter quick play number",
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+        ]
     }
 ];
 

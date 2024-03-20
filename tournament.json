@@ -37,7 +37,22 @@
           "discordId": "433712724753776651",
           "discordUsername": "lalrishav"
         },
-        "startDate": "2024-03-20T19:37:10.940Z"
+        "startDate": "2024-03-20T20:56:56.947Z",
+        "currentInning": 1,
+        "firstInning": {
+          "inningId": "1",
+          "player": {
+            "name": "lalrishav",
+            "discordId": "433712724753776651",
+            "discordUsername": "lalrishav"
+          },
+          "runScored": 0,
+          "wicket": 0,
+          "overs": 0,
+          "qpNumber": "1222",
+          "startDate": "2024-03-20T21:12:23.661Z",
+          "status": "IN_PROGRESS"
+        }
       }
     ],
     "startDate": "2024-03-20T18:26:07.963Z",

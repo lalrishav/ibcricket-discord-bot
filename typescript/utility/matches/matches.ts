@@ -81,19 +81,24 @@ export const StartMatch = (
         match.battingFirst = battingFirstPlayer;
         match.status = MatchStatusEnum.INITIATED;
         match.startDate = new Date();
-        const index = tournament.matches.findIndex(item => item.matchId === matchId);
-        if (index !== -1) {
-            tournament.matches[index] = match;
-            UpdateTournament(tournament)
-            return match
-        }else{
-            throw new Error("something went wrong")
-        }
+        match.currentInning = 0
+        UpdateMatch(tournament, match)
+        return match
     } else {
         throw new Error("only player belong to this match can start")
         //todo
     }
 };
+
+export const UpdateMatch = (tournament: Tournament, match: Match)=>{
+    const index = tournament.matches.findIndex(item => item.matchId === match.matchId);
+    if (index !== -1) {
+        tournament.matches[index] = match;
+        UpdateTournament(tournament)
+    }else{
+        throw new Error("something went wrong")
+    }
+}
 
 //todo
 // export const GetMatchesScheduleByTournamentIdAndPlayerIdAndStatus = (

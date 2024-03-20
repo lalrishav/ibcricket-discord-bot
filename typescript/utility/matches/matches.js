@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StartMatch = exports.GetMatchDetails = exports.GetMatchesByTournamentIdAndPlayerId = exports.GetMatchesByTournamentId = exports.InitiateMatches = void 0;
+exports.UpdateMatch = exports.StartMatch = exports.GetMatchDetails = exports.GetMatchesByTournamentIdAndPlayerId = exports.GetMatchesByTournamentId = exports.InitiateMatches = void 0;
 const match_1 = require("../../dtos/match");
 const validator_1 = require("../../validators/validator");
 const players_1 = require("../players/players");
@@ -66,15 +66,9 @@ const StartMatch = (matchId, playerId, tournamentId = "1") => {
         match.battingFirst = battingFirstPlayer;
         match.status = match_1.MatchStatusEnum.INITIATED;
         match.startDate = new Date();
-        const index = tournament.matches.findIndex(item => item.matchId === matchId);
-        if (index !== -1) {
-            tournament.matches[index] = match;
-            (0, tournament_1.UpdateTournament)(tournament);
-            return match;
-        }
-        else {
-            throw new Error("something went wrong");
-        }
+        match.currentInning = 0;
+        (0, exports.UpdateMatch)(tournament, match);
+        return match;
     }
     else {
         throw new Error("only player belong to this match can start");
@@ -82,6 +76,17 @@ const StartMatch = (matchId, playerId, tournamentId = "1") => {
     }
 };
 exports.StartMatch = StartMatch;
+const UpdateMatch = (tournament, match) => {
+    const index = tournament.matches.findIndex(item => item.matchId === match.matchId);
+    if (index !== -1) {
+        tournament.matches[index] = match;
+        (0, tournament_1.UpdateTournament)(tournament);
+    }
+    else {
+        throw new Error("something went wrong");
+    }
+};
+exports.UpdateMatch = UpdateMatch;
 //todo
 // export const GetMatchesScheduleByTournamentIdAndPlayerIdAndStatus = (
 //   tournamentId: string,
