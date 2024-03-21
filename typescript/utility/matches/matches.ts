@@ -91,14 +91,35 @@ export const StartMatch = (
     }
 };
 
-export const UpdateMatch = (tournament: Tournament, match: Match)=>{
+export const UpdateMatch = (tournament: Tournament, match: Match) => {
     const index = tournament.matches.findIndex(item => item.matchId === match.matchId);
     if (index !== -1) {
         tournament.matches[index] = match;
         UpdateTournament(tournament)
-    }else{
+    } else {
         throw new Error("something went wrong")
     }
+}
+
+export const EndMatch = (match: Match, tournament: Tournament , winner: Player | undefined , runner: Player | undefined, comment: string, isDraw: boolean, isLostByInnings: boolean = false): Match => {
+
+    if (match.status == MatchStatusEnum.COMPLETED) {
+        throw new Error("match is already completed")
+    }
+
+    match.status = MatchStatusEnum.COMPLETED
+    match.endDate = new Date()
+    match.comment = comment
+    // @ts-ignore
+    match.result = {
+        winner: winner,
+        looser: runner,
+        comment: comment,
+        isLostByInnings: isLostByInnings,
+        isDraw: isDraw
+    }
+    UpdateMatch(tournament, match)
+    return match
 }
 
 //todo

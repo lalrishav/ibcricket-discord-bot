@@ -7,6 +7,7 @@ export type Match = {
     secondPlayer: Player,
     pitch: string,
     battingFirst?: Player,
+    battingSecond?: Player,
     firstInning?: Inning,
     secondInning?: Inning,
     thirdInning?: Inning,
@@ -17,6 +18,7 @@ export type Match = {
     result?: MatchResult,
     currentInning? : number,
     totalOverRemaining?: number,
+    comment?: string
 }
 
 export enum MatchStatusEnum {
@@ -32,11 +34,11 @@ export enum MatchStatusEnum {
 }
 
 export type MatchResult = {
-    winner: Player,
-    looser: Player,
+    winner: Player | undefined,
+    looser: Player | undefined,
     comment: string,
-    bonusPoint: number,
     isLostByInnings: boolean
+    isDraw: boolean
 }
 
 

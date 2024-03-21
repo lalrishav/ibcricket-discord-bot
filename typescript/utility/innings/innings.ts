@@ -2,10 +2,10 @@
 
 import {Inning, InningStatus} from "../../dtos/inning";
 import {Player} from "../../dtos/player";
-import {GetMatchDetails, UpdateMatch} from "../matches/matches";
+import {EndMatch, GetMatchDetails, UpdateMatch} from "../matches/matches";
 import {GetPlayerByTournamentIdAndPlayerId} from "../players/players";
 import {GetTournamentDetails} from "../tournament/tournament";
-import {Match} from "../../dtos/match";
+import {Match, MatchStatusEnum} from "../../dtos/match";
 
 export const CreateInnings = (qpNumber: string, player: Player) => {
     return {
@@ -26,6 +26,10 @@ export const StartInning = (matchId: string, team: string, stadium: string, qpNu
     const tournament = GetTournamentDetails(tournamentId)
     const match = GetMatchDetails(tournament, matchId)
 
+    if (match.status == MatchStatusEnum.ABANDONED || match.status == MatchStatusEnum.NOT_YET_STARTED || match.status == MatchStatusEnum.COMPLETED ){
+        throw new Error ("can not start innings , match status " + match.status.toString())
+    }
+
     if (match.firstPlayer.discordId != playerId && match.secondPlayer.discordId != playerId) {
         throw new Error("Only players of this match are allowed to start innings")
     }
@@ -40,19 +44,33 @@ export const StartInning = (matchId: string, team: string, stadium: string, qpNu
 
 
     match.currentInning = (match.currentInning || 0) + 1
-    let keyword = ""
+    const player = GetPlayerByTournamentIdAndPlayerId(tournamentId, playerId)
+
+
     switch (match.currentInning) {
         case 1 :
-            match.firstInning = getFirstInnings(qpNumber, playerId, team, tournamentId)
+            match.firstInning = getInnings("1", qpNumber, player, team, tournamentId)
+            match.battingFirst = player
+            match.status = MatchStatusEnum.FIRST_INNING_IN_PROGRESS
+            if(player.discordId == match.firstPlayer.discordId){
+                match.battingSecond = match.secondPlayer
+            }else {
+                match.battingSecond = match.firstPlayer
+            }
             break;
         case 2:
-            keyword = "secondInning"
+            match.secondInning = getInnings("2", qpNumber, player, team, tournamentId)
+            match.status = MatchStatusEnum.SECOND_INNING_IN_PROGRESS
             break;
         case 3:
-            keyword = "thirdInning"
+            match.thirdInning = getInnings("3", qpNumber, player, team, tournamentId)
+            match.status = MatchStatusEnum.THIRD_INNING_IN_PROGRESS
             break;
         case 4:
-            keyword = "fourthInning"
+            match.fourthInning = getInnings("4", qpNumber, player, team, tournamentId)
+            match.status = MatchStatusEnum.FOURTH_INNING_IN_PROGRESS
+            break;
+        default:
             break;
     }
     UpdateMatch(tournament, match)
@@ -61,14 +79,19 @@ export const StartInning = (matchId: string, team: string, stadium: string, qpNu
 }
 
 export const EndInnings = (matchId: string,playerId: string, score: string, overs: string, wicket: string, matchLink: string, tournamentId: string = "1")=>{
+
     const tournament = GetTournamentDetails(tournamentId)
-    const match = GetMatchDetails(tournament, matchId)
+    let match = GetMatchDetails(tournament, matchId)
+
+    if (match.status == MatchStatusEnum.ABANDONED || match.status == MatchStatusEnum.NOT_YET_STARTED || match.status == MatchStatusEnum.COMPLETED ){
+        throw new Error ("can not start innings , match status " + match.status.toString())
+    }
 
     if (match.firstPlayer.discordId != playerId && match.secondPlayer.discordId != playerId) {
         throw new Error("Only players of this match are allowed to start innings")
     }
 
-    if (match.firstInning?.status != InningStatus.IN_PROGRESS && match.secondInning?.status != InningStatus.IN_PROGRESS && match.thirdInning?.status != InningStatus.IN_PROGRESS && match.fourthInning?.status == InningStatus.IN_PROGRESS) {
+    if (match.firstInning?.status != InningStatus.IN_PROGRESS && match.secondInning?.status != InningStatus.IN_PROGRESS && match.thirdInning?.status != InningStatus.IN_PROGRESS && match.fourthInning?.status != InningStatus.IN_PROGRESS) {
         throw new Error(`No innings to end`)
     }
 
@@ -89,8 +112,10 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
                 firstInning.matchLink = matchLink
                 match.firstInning = firstInning
                 match.totalOverRemaining = match.totalOverRemaining || 240 - Number(overs)
-                if (match.totalOverRemaining < 0) {
-                    throw new Error("you crossed the maximum over")
+                if (match.totalOverRemaining <= 0) {
+                    match = EndMatch(match, tournament, undefined, undefined, "Match Drawn", true)
+                    return {match:match, innings: firstInning}
+                    //todo - end match
                 }
                 UpdateMatch(tournament, match)
                 return {match: match, innings: firstInning}
@@ -98,22 +123,117 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
 
             break;
         case 2:
-            keyword = "secondInning"
+            const secondInning = match.secondInning
+            if(secondInning){
+                secondInning.status = InningStatus.COMPLETED
+                secondInning.endDate = new Date()
+                secondInning.overs = Number(overs)
+                secondInning.runScored = Number(score)
+                secondInning.wicket = Number(wicket)
+                match.secondInning = secondInning
+                let comment = "NA"
+                // @ts-ignore
+                const runDiff = match.secondInning.runScored - match.firstInning.runScored
+                if(runDiff > 0) {
+                    //that mean second inning player scored more than first inning player
+                    comment = `<@${secondInning.player.discordId}> lead by ${runDiff} runs`
+                }else {
+                    comment = `<@${match.battingFirst?.discordId}> lead by ${Math.abs(runDiff)} runs`
+                }
+                match.comment = comment
+                // @ts-ignore
+                match.totalOverRemaining = match.totalOverRemaining - Number(overs)
+                if (match.totalOverRemaining <= 0) {
+                    match = EndMatch(match, tournament, undefined, undefined, "Match Drawn", true)
+                    return {match:match, innings: secondInning}
+
+                }
+                UpdateMatch(tournament, match)
+                return {match: match, innings: secondInning}
+            }
             break;
         case 3:
-            keyword = "thirdInning"
+            const thirdInning = match.secondInning
+            if(thirdInning){
+                thirdInning.status = InningStatus.COMPLETED
+                thirdInning.endDate = new Date()
+                thirdInning.overs = Number(overs)
+                thirdInning.runScored = Number(score)
+                thirdInning.wicket = Number(wicket)
+                match.thirdInning = thirdInning
+                let comment = "NA"
+                // @ts-ignore
+                match.totalOverRemaining = match.totalOverRemaining - Number(overs)
+
+                // @ts-ignore
+                const firstTwoInningDiff = match.secondInning?.runScored - match.firstInning?.runScored
+                if(firstTwoInningDiff > 0){
+                    //that mean there is a possibility of losing the match by innings
+                    if(thirdInning.runScored < firstTwoInningDiff) {
+                        match = EndMatch(match, tournament, match.battingSecond, match.battingFirst, `${match.battingSecond?.discordUsername} won by innings and ${firstTwoInningDiff - thirdInning.runScored} runs`, false, true)
+                        return {match:match, innings: thirdInning}
+                    }else{
+                        comment = `<@${match.battingSecond?.discordId}> need ${thirdInning.runScored - firstTwoInningDiff} to win`
+                    }
+                }else{
+                    comment = `<@${match.battingSecond?.discordId}> need ${thirdInning.runScored - firstTwoInningDiff} to win`
+                }
+                match.comment = comment
+
+                if (match.totalOverRemaining <= 0) {
+                    match = EndMatch(match, tournament, undefined, undefined, "Match Drawn", true)
+                    return {match:match, innings: firstInning}
+                }
+
+                UpdateMatch(tournament, match)
+                return {match: match, innings: thirdInning}
+
+            }
             break;
         case 4:
-            keyword = "fourthInning"
+            const fourthInnings = match.fourthInning
+            if(fourthInnings){
+                fourthInnings.status = InningStatus.COMPLETED
+                fourthInnings.endDate = new Date()
+                fourthInnings.overs = Number(overs)
+                fourthInnings.runScored = Number(score)
+                fourthInnings.wicket = Number(wicket)
+                match.fourthInning = fourthInnings
+                // @ts-ignore
+                match.totalOverRemaining = match.totalOverRemaining - Number(overs)
+
+                // @ts-ignore
+                const runToWin = (match.firstInning?.runScored + match.thirdInning?.runScored) - match.secondInning?.runScored + 1
+                let comment = "NA"
+                if (fourthInnings.runScored > runToWin){
+                    comment = `<@${match.battingSecond?.discordId} won by ${10 - Number(wicket)} wicket`
+                    match = EndMatch(match, tournament, match.battingSecond, match.battingFirst, comment, false)
+                    return {match:match, innings: fourthInnings}
+                }else if(fourthInnings.runScored < runToWin){
+                    if(Number(wicket) == 10){
+                        comment = `<@${match.battingFirst?.discordId} won by ${runToWin - fourthInnings.runScored} runs`
+                        match = EndMatch(match, tournament, match.battingFirst, match.battingSecond, comment, false)
+                        return {match:match, innings: fourthInnings}
+
+                    }else if(match.totalOverRemaining <= 0){
+                        comment = "Match draw"
+                        match = EndMatch(match, tournament, undefined, undefined, comment, true)
+                        return {match:match, innings: fourthInnings}
+                    }
+                }
+
+
+                UpdateMatch(tournament, match)
+                return {match: match, innings: secondInning}
+            }
             break;
     }
 
 }
 
-const getFirstInnings = (qpNumber: string, playerId: string,team:string, tournamentId: string = "1"): Inning => {
-    const player = GetPlayerByTournamentIdAndPlayerId(tournamentId, playerId)
+const getInnings = (inningId: string, qpNumber: string, player: Player,team:string, tournamentId: string = "1"): Inning => {
     return {
-        inningId: "1",
+        inningId: inningId,
         player: player,
         runScored: 0,
         wicket: 0,
@@ -122,6 +242,10 @@ const getFirstInnings = (qpNumber: string, playerId: string,team:string, tournam
         startDate: new Date(),
         status: InningStatus.IN_PROGRESS,
     }
+}
+
+const EndFirstInnings = ()=>{
+
 }
 
 // export const EndInnings = (tournamentId, matchId, playerId) => {
