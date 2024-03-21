@@ -3,7 +3,7 @@ import {ReadJsonFile, UpdateJsonFile} from "../file-operation";
 import {InitatePointsTable} from "../pointsTable/pointsTable";
 import {InitiateMatches} from "../matches/matches";
 
-const FILE_PATH = "tournament_base.json"
+const FILE_PATH = "tournament.json"
 export const InitiateTournament = (
   name: string,
   numberOfOvers: string,

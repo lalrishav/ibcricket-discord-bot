@@ -1,0 +1,568 @@
+[
+  {
+    "tournamentId": "1",
+    "name": "ibc 2",
+    "numberOfOvers": "unlimited",
+    "typeOfPitch": "bounce",
+    "status": "IN PROGRESS",
+    "players": [
+      {
+        "name": "rot9999",
+        "discordId": "1129416139622068326",
+        "discordUsername": "rot9999"
+      },
+      {
+        "name": "lalrishav",
+        "discordId": "433712724753776651",
+        "discordUsername": "lalrishav"
+      },
+      {
+        "name": "nik",
+        "discordId": "1202684714297598005",
+        "discordUsername": "nik"
+      },
+      {
+        "name": "rashesh",
+        "discordId": "948383732669235230",
+        "discordUsername": "rashesh"
+      },
+      {
+        "name": "saurabhkumar",
+        "discordId": "1018278437439414333",
+        "discordUsername": "saurabhkumar"
+      },
+      {
+        "name": "srinathbingi",
+        "discordId": "1097817325903822968",
+        "discordUsername": "srinathbingi"
+      },
+      {
+        "name": "karthik",
+        "discordId": "533319320932188171",
+        "discordUsername": "karthik"
+      },
+      {
+        "name": "hirenbhuva",
+        "discordId": "824126372909809714",
+        "discordUsername": "hirenbhuva"
+      },
+      {
+        "name": "iceman",
+        "discordId": "923833652675239969",
+        "discordUsername": "iceman"
+      },
+      {
+        "name": "donzzz1717",
+        "discordId": "1062420491832406046",
+        "discordUsername": "donzzz1717"
+      },
+      {
+        "name": "mpower99",
+        "discordId": "967055935732351026",
+        "discordUsername": "mpower99"
+      },
+      {
+        "name": "arunpoddar",
+        "discordId": "1218564346821611643",
+        "discordUsername": "arunpoddar"
+      }
+    ],
+    "matches": [
+      {
+        "matchId": "59",
+        "firstPlayer": {
+          "name": "donzzz1717",
+          "discordId": "1062420491832406046",
+          "discordUsername": "donzzz1717"
+        },
+        "secondPlayer": {
+          "name": "iceman",
+          "discordId": "923833652675239969",
+          "discordUsername": "iceman"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "61",
+        "firstPlayer": {
+          "name": "karthik",
+          "discordId": "533319320932188171",
+          "discordUsername": "karthik"
+        },
+        "secondPlayer": {
+          "name": "nik",
+          "discordId": "1202684714297598005",
+          "discordUsername": "nik"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "62",
+        "firstPlayer": {
+          "name": "rashesh",
+          "discordId": "948383732669235230",
+          "discordUsername": "rashesh"
+        },
+        "secondPlayer": {
+          "name": "lalrishav",
+          "discordId": "433712724753776651",
+          "discordUsername": "lalrishav"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "63",
+        "firstPlayer": {
+          "name": "saurabhkumar",
+          "discordId": "1018278437439414333",
+          "discordUsername": "saurabhkumar"
+        },
+        "secondPlayer": {
+          "name": "rot9999",
+          "discordId": "1129416139622068326",
+          "discordUsername": "rot9999"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "64",
+        "firstPlayer": {
+          "name": "mpower99",
+          "discordId": "967055935732351026",
+          "discordUsername": "mpower99"
+        },
+        "secondPlayer": {
+          "name": "iceman",
+          "discordId": "923833652675239969",
+          "discordUsername": "iceman"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "65",
+        "firstPlayer": {
+          "name": "arunpoddar",
+          "discordId": "1218564346821611643",
+          "discordUsername": "arunpoddar"
+        },
+        "secondPlayer": {
+          "name": "hirenbhuva",
+          "discordId": "824126372909809714",
+          "discordUsername": "hirenbhuva"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "67",
+        "firstPlayer": {
+          "name": "karthik",
+          "discordId": "533319320932188171",
+          "discordUsername": "karthik"
+        },
+        "secondPlayer": {
+          "name": "lalrishav",
+          "discordId": "433712724753776651",
+          "discordUsername": "lalrishav"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "68",
+        "firstPlayer": {
+          "name": "nik",
+          "discordId": "1202684714297598005",
+          "discordUsername": "nik"
+        },
+        "secondPlayer": {
+          "name": "rot9999",
+          "discordId": "1129416139622068326",
+          "discordUsername": "rot9999"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "69",
+        "firstPlayer": {
+          "name": "saurabhkumar",
+          "discordId": "1018278437439414333",
+          "discordUsername": "saurabhkumar"
+        },
+        "secondPlayer": {
+          "name": "iceman",
+          "discordId": "923833652675239969",
+          "discordUsername": "iceman"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "70",
+        "firstPlayer": {
+          "name": "srinathbingi",
+          "discordId": "1097817325903822968",
+          "discordUsername": "srinathbingi"
+        },
+        "secondPlayer": {
+          "name": "hirenbhuva",
+          "discordId": "824126372909809714",
+          "discordUsername": "hirenbhuva"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "72",
+        "firstPlayer": {
+          "name": "arunpoddar",
+          "discordId": "1218564346821611643",
+          "discordUsername": "arunpoddar"
+        },
+        "secondPlayer": {
+          "name": "donzzz1717",
+          "discordId": "1062420491832406046",
+          "discordUsername": "donzzz1717"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "73",
+        "firstPlayer": {
+          "name": "karthik",
+          "discordId": "533319320932188171",
+          "discordUsername": "karthik"
+        },
+        "secondPlayer": {
+          "name": "rot9999",
+          "discordId": "1129416139622068326",
+          "discordUsername": "rot9999"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "74",
+        "firstPlayer": {
+          "name": "nik",
+          "discordId": "1202684714297598005",
+          "discordUsername": "nik"
+        },
+        "secondPlayer": {
+          "name": "iceman",
+          "discordId": "923833652675239969",
+          "discordUsername": "iceman"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "75",
+        "firstPlayer": {
+          "name": "rashesh",
+          "discordId": "948383732669235230",
+          "discordUsername": "rashesh"
+        },
+        "secondPlayer": {
+          "name": "hirenbhuva",
+          "discordId": "824126372909809714",
+          "discordUsername": "hirenbhuva"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "77",
+        "firstPlayer": {
+          "name": "srinathbingi",
+          "discordId": "1097817325903822968",
+          "discordUsername": "srinathbingi"
+        },
+        "secondPlayer": {
+          "name": "donzzz1717",
+          "discordId": "1062420491832406046",
+          "discordUsername": "donzzz1717"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "78",
+        "firstPlayer": {
+          "name": "mpower99",
+          "discordId": "967055935732351026",
+          "discordUsername": "mpower99"
+        },
+        "secondPlayer": {
+          "name": "arunpoddar",
+          "discordId": "1218564346821611643",
+          "discordUsername": "arunpoddar"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      }
+    ],
+    "startDate": "2024-03-21T17:28:07.793Z",
+    "pointsTable": {
+      "rot9999": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "lalrishav": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "nik": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "rashesh": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "saurabhkumar": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "srinathbingi": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "karthik": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "hirenbhuva": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "iceman": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "donzzz1717": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "mpower99": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
+      "arunpoddar": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      }
+    }
+  }
+]

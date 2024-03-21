@@ -4,7 +4,7 @@ exports.GetNewTournamentId = exports.GetAllTournaments = exports.GetTournamentDe
 const tournament_1 = require("../../dtos/tournament");
 const file_operation_1 = require("../file-operation");
 const pointsTable_1 = require("../pointsTable/pointsTable");
-const FILE_PATH = "tournament_base.json";
+const FILE_PATH = "tournament.json";
 const InitiateTournament = (name, numberOfOvers, typeOfPitch) => {
     const latestTournamentId = (0, exports.GetNewTournamentId)();
     if (latestTournamentId != "1") {
