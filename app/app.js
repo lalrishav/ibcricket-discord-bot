@@ -47,7 +47,7 @@ client.on("ready", (c) => {
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
-  console.log(interaction.commandName);
+  console.log(`command fired /${interaction.commandName} by ${interaction.user.username}`);
   switch (interaction.commandName) {
     case "create-tournament":
       createTournament(interaction);

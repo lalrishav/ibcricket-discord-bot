@@ -16,7 +16,6 @@ const startTournament = async (interaction, appEmitter) => {
 
     } catch (e) {
         interaction.reply(e.message);
-        console.log("error ", e.message)
     }
 }
 
