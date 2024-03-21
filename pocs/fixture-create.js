@@ -96,7 +96,11 @@ const users = [
 
 // Function to find user by name
 function findUserByName(name) {
-    return users.find(user => user.name === name);
+    return users.find((user)=>{
+        console.log("inside find", user.name, name)
+        console.log()
+        return user => user.name === name
+    });
 }
 
 // Function to generate JSON array for matches
@@ -104,10 +108,13 @@ function generateMatchesArray(matches, users) {
     const matchesArray = [];
 
     matches.forEach(match => {
+        console.log(match.firstPlayer)
+        console.log(match.secondPlayer)
         const firstPlayer = findUserByName(match.firstPlayer);
         const secondPlayer = findUserByName(match.secondPlayer);
-
-        if (firstPlayer && secondPlayer) {
+        console.log("hello", match.matchId)
+        console.log(firstPlayer, secondPlayer)
+        if (true) {
             const matchData = {
                 "matchId": match.matchId.toString(),
                 "firstPlayer": {
@@ -125,6 +132,8 @@ function generateMatchesArray(matches, users) {
             };
 
             matchesArray.push(matchData);
+        }else{
+            matchesArray.push({});
         }
     });
 
@@ -138,4 +147,4 @@ const result = generateMatchesArray(matches, users);
 const jsonString = JSON.stringify(result, null, 2);
 
 // Log the result
-console.log(jsonString);
+// console.log(jsonString);

@@ -1,6 +1,6 @@
 const discord = require("discord.js");
 
-const createChannel = async (client, name)=>{
+const createChannel = async (client, name, parent)=>{
     console.log(process.env.GUILD_ID)
     const guild = client.guilds.cache.get(process.env.GUILD_ID);
 
@@ -13,6 +13,7 @@ const createChannel = async (client, name)=>{
             type: discord.ChannelType.GuildText,
             topic: 'This is a new text channel!', // Optional: Set the channel topic
             reason: 'Needed a new channel.', // Optional: Specify the reason for creating the channel
+            parent: parent
         });
         console.log('Channel created:', channel);
         return channel

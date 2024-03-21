@@ -14,6 +14,7 @@ const {getFixture} = require("./commands/interactions/fixture");
 const {startMatch} = require("./commands/interactions/start-match");
 const {startInning} = require("./commands/interactions/start-inning");
 const {endInnings} = require("./commands/interactions/end-innings");
+const {createChannel} = require("./utils/createChannel");
 
 const appEmitter = new EventEmitter();
 
@@ -28,14 +29,18 @@ const client = new Client({
 
 client.on("ready", (c) => {
   console.log(`✅ ${c.user.tag} is online.`);
-  appEmitter.on("sendTournamentStartDetails", async (channel,tournamentId)=>{
+  appEmitter.on("sendTournamentStartDetails", async (channel,tournament)=>{
     if(channel){
-      const fixture = GetFixtures(tournamentId)
-      const table = getFixtureTable(fixture)
-      const url = `https://api.quickchart.io/v1/table?data=${JSON.stringify(table)}`
-      console.log(url)
-      const screenshot = await takeWebpageScreenshot(url)
-      channel.send({files: [{ attachment: screenshot, name: "screenshot.png" }],})
+      const halfWayIndex = Math.ceil(tournament.matches.length / 2);
+
+      for (let i = 0; i < tournament.matches.length; i++) {
+        const match = tournament.matches[i];
+
+        const category = i < halfWayIndex ? "1220422570550104094" : "1220422570550104094";
+        const channelName = `match-${match.matchId}- ${match.firstPlayer.name}-vs-${match.secondPlayer.name}`
+        const newChannel = await createChannel(client, channelName, category)
+        await newChannel.send(`Welcome <@${match.firstPlayer.discordId}> and <@${match.secondPlayer.discordId}> this is your channel which you will use for this match, Toss have to be accommodated manually right now using https://cointoss.studio91media.co.uk/, player who will bat first use /start-innings <england> <stadium-2> <qpNumber> to start your innings, once completed you can use /end-innings <score> <overs> <profileLink>  to end your innings. If facing any issue or bot is offline please proceed manually.`)
+      }
     }
   })
 });

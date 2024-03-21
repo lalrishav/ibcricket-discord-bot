@@ -34,7 +34,7 @@ export const start = (tournamentId: string): Tournament => {
     throw new Error("No tournament found")
   } else {
     const pointsTable = InitatePointsTable(data[index].players);
-    const matches = InitiateMatches(data[index].players, data[index].typeOfPitch)
+    // const matches = InitiateMatches(data[index].players, data[index].typeOfPitch)
     if (data[index].status != TournamentStatus.YET_TO_START) {
       //todo: return can not start tournament create a new one
       console.log("can not start tournament create a new one");
@@ -42,7 +42,6 @@ export const start = (tournamentId: string): Tournament => {
     data[index].startDate = new Date();
     data[index].status = TournamentStatus.IN_PROGRESS;
     data[index].pointsTable = pointsTable;
-    data[index].matches = matches
   }
   UpdateJsonFile("tournament.json", data);
   return data[index]

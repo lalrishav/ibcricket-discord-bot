@@ -9,7 +9,7 @@ const startMatch = async (client, interaction) => {
         }
         const discordUserId = interaction.user.id
         const match = StartMatch(matchId, discordUserId)
-        const channelName = `${match.matchId}- ${match.firstPlayer.name} - vs - ${match.secondPlayer.name}`
+        const channelName = `match-${match.matchId}- ${match.firstPlayer.name} - vs - ${match.secondPlayer.name}`
         await interaction.reply(`Creating channel named - ${channelName}`)
         for(let i =0; i < 100; i++){
             const channel = await createChannel(client, channelName)

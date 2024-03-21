@@ -4,7 +4,6 @@ exports.GetNewTournamentId = exports.GetAllTournaments = exports.GetTournamentDe
 const tournament_1 = require("../../dtos/tournament");
 const file_operation_1 = require("../file-operation");
 const pointsTable_1 = require("../pointsTable/pointsTable");
-const matches_1 = require("../matches/matches");
 const InitiateTournament = (name, numberOfOvers, typeOfPitch) => {
     const latestTournamentId = (0, exports.GetNewTournamentId)();
     if (latestTournamentId != "1") {
@@ -32,7 +31,7 @@ const start = (tournamentId) => {
     }
     else {
         const pointsTable = (0, pointsTable_1.InitatePointsTable)(data[index].players);
-        const matches = (0, matches_1.InitiateMatches)(data[index].players, data[index].typeOfPitch);
+        // const matches = InitiateMatches(data[index].players, data[index].typeOfPitch)
         if (data[index].status != tournament_1.TournamentStatus.YET_TO_START) {
             //todo: return can not start tournament create a new one
             console.log("can not start tournament create a new one");
@@ -40,7 +39,6 @@ const start = (tournamentId) => {
         data[index].startDate = new Date();
         data[index].status = tournament_1.TournamentStatus.IN_PROGRESS;
         data[index].pointsTable = pointsTable;
-        data[index].matches = matches;
     }
     (0, file_operation_1.UpdateJsonFile)("tournament.json", data);
     return data[index];
