@@ -59,5 +59,4 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.login(
-    "MTIxOTQyNzY0NjIxMjE0NTIwNA.GrWqWn.cF2qrGFYAT-8x7AfMgGH1vXZ04KuNHZ07q0-cU"
   );
