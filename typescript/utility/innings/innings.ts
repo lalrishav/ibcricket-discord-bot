@@ -95,7 +95,7 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
         throw new Error(`No innings to end`)
     }
 
-    if (match.currentInning == 4) {
+    if (match.currentInning == 5) {
         throw new Error("match is already completed")
     }
 
@@ -111,7 +111,8 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
                 firstInning.wicket = Number(wicket)
                 firstInning.matchLink = matchLink
                 match.firstInning = firstInning
-                match.totalOverRemaining = match.totalOverRemaining || 240 - Number(overs)
+                // @ts-ignore
+                match.totalOverRemaining = match.totalOverRemaining  - Number(overs)
                 if (match.totalOverRemaining <= 0) {
                     match = EndMatch(match, tournament, undefined, undefined, "Match Drawn", true)
                     return {match:match, innings: firstInning}
@@ -153,7 +154,7 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
             }
             break;
         case 3:
-            const thirdInning = match.secondInning
+            const thirdInning = match.firstInning
             if(thirdInning){
                 thirdInning.status = InningStatus.COMPLETED
                 thirdInning.endDate = new Date()
@@ -182,7 +183,7 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
 
                 if (match.totalOverRemaining <= 0) {
                     match = EndMatch(match, tournament, undefined, undefined, "Match Drawn", true)
-                    return {match:match, innings: firstInning}
+                    return {match:match, innings: thirdInning}
                 }
 
                 UpdateMatch(tournament, match)
@@ -206,12 +207,12 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
                 const runToWin = (match.firstInning?.runScored + match.thirdInning?.runScored) - match.secondInning?.runScored + 1
                 let comment = "NA"
                 if (fourthInnings.runScored > runToWin){
-                    comment = `<@${match.battingSecond?.discordId} won by ${10 - Number(wicket)} wicket`
+                    comment = `<@${match.battingSecond?.discordId}> won by ${10 - Number(wicket)} wicket`
                     match = EndMatch(match, tournament, match.battingSecond, match.battingFirst, comment, false)
                     return {match:match, innings: fourthInnings}
                 }else if(fourthInnings.runScored < runToWin){
                     if(Number(wicket) == 10){
-                        comment = `<@${match.battingFirst?.discordId} won by ${runToWin - fourthInnings.runScored} runs`
+                        comment = `<@${match.battingFirst?.discordId}> won by ${runToWin - fourthInnings.runScored} runs`
                         match = EndMatch(match, tournament, match.battingFirst, match.battingSecond, comment, false)
                         return {match:match, innings: fourthInnings}
 
@@ -224,7 +225,7 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
 
 
                 UpdateMatch(tournament, match)
-                return {match: match, innings: secondInning}
+                return {match: match, innings: fourthInnings}
             }
             break;
     }

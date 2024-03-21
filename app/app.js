@@ -63,7 +63,7 @@ client.on("interactionCreate", async (interaction) => {
       await startInning(interaction)
       break;
     case "end-inning":
-      await endInnings(interaction)
+      await endInnings(interaction, appEmitter)
       break;
     default:
       break;

@@ -1,7 +1,7 @@
 [
   {
     "tournamentId": "1",
-    "name": "pepsi cup",
+    "name": "ibc 2",
     "numberOfOvers": "unlimited",
     "typeOfPitch": "bounce",
     "status": "IN PROGRESS",
@@ -37,62 +37,12 @@
           "discordId": "433712724753776651",
           "discordUsername": "lalrishav"
         },
-        "startDate": "2024-03-20T20:56:56.947Z",
-        "currentInning": 3,
-        "firstInning": {
-          "inningId": "1",
-          "player": {
-            "name": "lalrishav",
-            "discordId": "433712724753776651",
-            "discordUsername": "lalrishav"
-          },
-          "runScored": 788,
-          "wicket": 90,
-          "overs": 90,
-          "qpNumber": "1234",
-          "startDate": "2024-03-20T23:28:47.735Z",
-          "status": "COMPLETED",
-          "endDate": "2024-03-20T23:30:06.378Z",
-          "matchLink": "99"
-        },
-        "battingSecond": {
-          "name": "ibcricket-bot",
-          "discordId": "1219427646212145204",
-          "discordUsername": "ibcricket-bot"
-        },
-        "totalOverRemaining": 100,
-        "secondInning": {
-          "inningId": "2",
-          "player": {
-            "name": "lalrishav",
-            "discordId": "433712724753776651",
-            "discordUsername": "lalrishav"
-          },
-          "runScored": 25,
-          "wicket": 50,
-          "overs": 50,
-          "qpNumber": "343",
-          "startDate": "2024-03-20T23:31:23.396Z",
-          "status": "COMPLETED",
-          "endDate": "2024-03-20T23:32:05.880Z"
-        },
-        "thirdInning": {
-          "inningId": "3",
-          "player": {
-            "name": "lalrishav",
-            "discordId": "433712724753776651",
-            "discordUsername": "lalrishav"
-          },
-          "runScored": 0,
-          "wicket": 0,
-          "overs": 0,
-          "qpNumber": "1234",
-          "startDate": "2024-03-20T23:32:43.166Z",
-          "status": "IN_PROGRESS"
-        }
+        "startDate": "2024-03-21T13:21:34.706Z",
+        "currentInning": 0,
+        "totalOverRemaining": 240
       }
     ],
-    "startDate": "2024-03-20T18:26:07.963Z",
+    "startDate": "2024-03-21T13:21:12.228Z",
     "pointsTable": {
       "lalrishav": {
         "totalMatchesPlayed": 0,

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateMatch = exports.StartMatch = exports.GetMatchDetails = exports.GetMatchesByTournamentIdAndPlayerId = exports.GetMatchesByTournamentId = exports.InitiateMatches = void 0;
+exports.EndMatch = exports.UpdateMatch = exports.StartMatch = exports.GetMatchDetails = exports.GetMatchesByTournamentIdAndPlayerId = exports.GetMatchesByTournamentId = exports.InitiateMatches = void 0;
 const match_1 = require("../../dtos/match");
 const validator_1 = require("../../validators/validator");
 const players_1 = require("../players/players");
@@ -88,6 +88,25 @@ const UpdateMatch = (tournament, match) => {
     }
 };
 exports.UpdateMatch = UpdateMatch;
+const EndMatch = (match, tournament, winner, runner, comment, isDraw, isLostByInnings = false) => {
+    if (match.status == match_1.MatchStatusEnum.COMPLETED) {
+        throw new Error("match is already completed");
+    }
+    match.status = match_1.MatchStatusEnum.COMPLETED;
+    match.endDate = new Date();
+    match.comment = comment;
+    // @ts-ignore
+    match.result = {
+        winner: winner,
+        looser: runner,
+        comment: comment,
+        isLostByInnings: isLostByInnings,
+        isDraw: isDraw
+    };
+    (0, exports.UpdateMatch)(tournament, match);
+    return match;
+};
+exports.EndMatch = EndMatch;
 //todo
 // export const GetMatchesScheduleByTournamentIdAndPlayerIdAndStatus = (
 //   tournamentId: string,

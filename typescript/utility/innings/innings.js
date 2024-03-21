@@ -6,6 +6,7 @@ const inning_1 = require("../../dtos/inning");
 const matches_1 = require("../matches/matches");
 const players_1 = require("../players/players");
 const tournament_1 = require("../tournament/tournament");
+const match_1 = require("../../dtos/match");
 const CreateInnings = (qpNumber, player) => {
     return {
         //todo
@@ -24,6 +25,9 @@ const StartInning = (matchId, team, stadium, qpNumber, playerId, tournamentId = 
     var _a, _b, _c, _d;
     const tournament = (0, tournament_1.GetTournamentDetails)(tournamentId);
     const match = (0, matches_1.GetMatchDetails)(tournament, matchId);
+    if (match.status == match_1.MatchStatusEnum.ABANDONED || match.status == match_1.MatchStatusEnum.NOT_YET_STARTED || match.status == match_1.MatchStatusEnum.COMPLETED) {
+        throw new Error("can not start innings , match status " + match.status.toString());
+    }
     if (match.firstPlayer.discordId != playerId && match.secondPlayer.discordId != playerId) {
         throw new Error("Only players of this match are allowed to start innings");
     }
@@ -35,12 +39,11 @@ const StartInning = (matchId, team, stadium, qpNumber, playerId, tournamentId = 
     }
     match.currentInning = (match.currentInning || 0) + 1;
     const player = (0, players_1.GetPlayerByTournamentIdAndPlayerId)(tournamentId, playerId);
-    let keyword = "";
-    console.log(match.currentInning);
     switch (match.currentInning) {
         case 1:
             match.firstInning = getInnings("1", qpNumber, player, team, tournamentId);
             match.battingFirst = player;
+            match.status = match_1.MatchStatusEnum.FIRST_INNING_IN_PROGRESS;
             if (player.discordId == match.firstPlayer.discordId) {
                 match.battingSecond = match.secondPlayer;
             }
@@ -49,14 +52,16 @@ const StartInning = (matchId, team, stadium, qpNumber, playerId, tournamentId = 
             }
             break;
         case 2:
-            console.log("here");
             match.secondInning = getInnings("2", qpNumber, player, team, tournamentId);
+            match.status = match_1.MatchStatusEnum.SECOND_INNING_IN_PROGRESS;
             break;
         case 3:
             match.thirdInning = getInnings("3", qpNumber, player, team, tournamentId);
+            match.status = match_1.MatchStatusEnum.THIRD_INNING_IN_PROGRESS;
             break;
         case 4:
             match.fourthInning = getInnings("4", qpNumber, player, team, tournamentId);
+            match.status = match_1.MatchStatusEnum.FOURTH_INNING_IN_PROGRESS;
             break;
         default:
             break;
@@ -66,16 +71,19 @@ const StartInning = (matchId, team, stadium, qpNumber, playerId, tournamentId = 
 };
 exports.StartInning = StartInning;
 const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tournamentId = "1") => {
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
     const tournament = (0, tournament_1.GetTournamentDetails)(tournamentId);
-    const match = (0, matches_1.GetMatchDetails)(tournament, matchId);
+    let match = (0, matches_1.GetMatchDetails)(tournament, matchId);
+    if (match.status == match_1.MatchStatusEnum.ABANDONED || match.status == match_1.MatchStatusEnum.NOT_YET_STARTED || match.status == match_1.MatchStatusEnum.COMPLETED) {
+        throw new Error("can not start innings , match status " + match.status.toString());
+    }
     if (match.firstPlayer.discordId != playerId && match.secondPlayer.discordId != playerId) {
         throw new Error("Only players of this match are allowed to start innings");
     }
     if (((_a = match.firstInning) === null || _a === void 0 ? void 0 : _a.status) != inning_1.InningStatus.IN_PROGRESS && ((_b = match.secondInning) === null || _b === void 0 ? void 0 : _b.status) != inning_1.InningStatus.IN_PROGRESS && ((_c = match.thirdInning) === null || _c === void 0 ? void 0 : _c.status) != inning_1.InningStatus.IN_PROGRESS && ((_d = match.fourthInning) === null || _d === void 0 ? void 0 : _d.status) != inning_1.InningStatus.IN_PROGRESS) {
         throw new Error(`No innings to end`);
     }
-    if (match.currentInning == 4) {
+    if (match.currentInning == 5) {
         throw new Error("match is already completed");
     }
     let keyword = "";
@@ -90,8 +98,11 @@ const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tourname
                 firstInning.wicket = Number(wicket);
                 firstInning.matchLink = matchLink;
                 match.firstInning = firstInning;
-                match.totalOverRemaining = match.totalOverRemaining || 240 - Number(overs);
-                if (match.totalOverRemaining < 0) {
+                // @ts-ignore
+                match.totalOverRemaining = match.totalOverRemaining - Number(overs);
+                if (match.totalOverRemaining <= 0) {
+                    match = (0, matches_1.EndMatch)(match, tournament, undefined, undefined, "Match Drawn", true);
+                    return { match: match, innings: firstInning };
                     //todo - end match
                 }
                 (0, matches_1.UpdateMatch)(tournament, match);
@@ -107,20 +118,97 @@ const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tourname
                 secondInning.runScored = Number(score);
                 secondInning.wicket = Number(wicket);
                 match.secondInning = secondInning;
+                let comment = "NA";
+                // @ts-ignore
+                const runDiff = match.secondInning.runScored - match.firstInning.runScored;
+                if (runDiff > 0) {
+                    //that mean second inning player scored more than first inning player
+                    comment = `<@${secondInning.player.discordId}> lead by ${runDiff} runs`;
+                }
+                else {
+                    comment = `<@${(_e = match.battingFirst) === null || _e === void 0 ? void 0 : _e.discordId}> lead by ${Math.abs(runDiff)} runs`;
+                }
+                match.comment = comment;
                 // @ts-ignore
                 match.totalOverRemaining = match.totalOverRemaining - Number(overs);
-                if (match.totalOverRemaining < 0) {
-                    //todo - end match
+                if (match.totalOverRemaining <= 0) {
+                    match = (0, matches_1.EndMatch)(match, tournament, undefined, undefined, "Match Drawn", true);
+                    return { match: match, innings: secondInning };
                 }
                 (0, matches_1.UpdateMatch)(tournament, match);
                 return { match: match, innings: secondInning };
             }
             break;
         case 3:
-            keyword = "thirdInning";
+            const thirdInning = match.firstInning;
+            if (thirdInning) {
+                thirdInning.status = inning_1.InningStatus.COMPLETED;
+                thirdInning.endDate = new Date();
+                thirdInning.overs = Number(overs);
+                thirdInning.runScored = Number(score);
+                thirdInning.wicket = Number(wicket);
+                match.thirdInning = thirdInning;
+                let comment = "NA";
+                // @ts-ignore
+                match.totalOverRemaining = match.totalOverRemaining - Number(overs);
+                // @ts-ignore
+                const firstTwoInningDiff = ((_f = match.secondInning) === null || _f === void 0 ? void 0 : _f.runScored) - ((_g = match.firstInning) === null || _g === void 0 ? void 0 : _g.runScored);
+                if (firstTwoInningDiff > 0) {
+                    //that mean there is a possibility of losing the match by innings
+                    if (thirdInning.runScored < firstTwoInningDiff) {
+                        match = (0, matches_1.EndMatch)(match, tournament, match.battingSecond, match.battingFirst, `${(_h = match.battingSecond) === null || _h === void 0 ? void 0 : _h.discordUsername} won by innings and ${firstTwoInningDiff - thirdInning.runScored} runs`, false, true);
+                        return { match: match, innings: thirdInning };
+                    }
+                    else {
+                        comment = `<@${(_j = match.battingSecond) === null || _j === void 0 ? void 0 : _j.discordId}> need ${thirdInning.runScored - firstTwoInningDiff} to win`;
+                    }
+                }
+                else {
+                    comment = `<@${(_k = match.battingSecond) === null || _k === void 0 ? void 0 : _k.discordId}> need ${thirdInning.runScored - firstTwoInningDiff} to win`;
+                }
+                match.comment = comment;
+                if (match.totalOverRemaining <= 0) {
+                    match = (0, matches_1.EndMatch)(match, tournament, undefined, undefined, "Match Drawn", true);
+                    return { match: match, innings: thirdInning };
+                }
+                (0, matches_1.UpdateMatch)(tournament, match);
+                return { match: match, innings: thirdInning };
+            }
             break;
         case 4:
-            keyword = "fourthInning";
+            const fourthInnings = match.fourthInning;
+            if (fourthInnings) {
+                fourthInnings.status = inning_1.InningStatus.COMPLETED;
+                fourthInnings.endDate = new Date();
+                fourthInnings.overs = Number(overs);
+                fourthInnings.runScored = Number(score);
+                fourthInnings.wicket = Number(wicket);
+                match.fourthInning = fourthInnings;
+                // @ts-ignore
+                match.totalOverRemaining = match.totalOverRemaining - Number(overs);
+                // @ts-ignore
+                const runToWin = (((_l = match.firstInning) === null || _l === void 0 ? void 0 : _l.runScored) + ((_m = match.thirdInning) === null || _m === void 0 ? void 0 : _m.runScored)) - ((_o = match.secondInning) === null || _o === void 0 ? void 0 : _o.runScored) + 1;
+                let comment = "NA";
+                if (fourthInnings.runScored > runToWin) {
+                    comment = `<@${(_p = match.battingSecond) === null || _p === void 0 ? void 0 : _p.discordId}> won by ${10 - Number(wicket)} wicket`;
+                    match = (0, matches_1.EndMatch)(match, tournament, match.battingSecond, match.battingFirst, comment, false);
+                    return { match: match, innings: fourthInnings };
+                }
+                else if (fourthInnings.runScored < runToWin) {
+                    if (Number(wicket) == 10) {
+                        comment = `<@${(_q = match.battingFirst) === null || _q === void 0 ? void 0 : _q.discordId}> won by ${runToWin - fourthInnings.runScored} runs`;
+                        match = (0, matches_1.EndMatch)(match, tournament, match.battingFirst, match.battingSecond, comment, false);
+                        return { match: match, innings: fourthInnings };
+                    }
+                    else if (match.totalOverRemaining <= 0) {
+                        comment = "Match draw";
+                        match = (0, matches_1.EndMatch)(match, tournament, undefined, undefined, comment, true);
+                        return { match: match, innings: fourthInnings };
+                    }
+                }
+                (0, matches_1.UpdateMatch)(tournament, match);
+                return { match: match, innings: fourthInnings };
+            }
             break;
     }
 };

@@ -1,6 +1,7 @@
 const {StartInning, EndInnings} = require("../../../typescript/utility/innings/innings");
 const {MatchStatusEnum} = require("../../../typescript/dtos/match");
-const endInnings = (interaction)=>{
+const {getFixture} = require("./fixture");
+const endInnings = async (interaction, appEmitter)=>{
     try {
         const discordUserId = interaction.user.id
         const score = interaction.options.get("run_scored").value;
@@ -9,15 +10,12 @@ const endInnings = (interaction)=>{
         const link = interaction.options.get("match_link").value;
 
         const channelName = interaction.channel.name
-        if(!channelName.toString().endsWith("bot")) {
-            interaction.reply("Not a valid channel to fire this command")
-        }else{
             const matchId = channelName.toString().split("-")[0]
             if (!matchId){
                 interaction.reply("something went wrong")
             }
             const {innings, match} = EndInnings(matchId, discordUserId, score, overs, wickets, link)
-            interaction.reply(`Below is the match summary - 
+            await interaction.reply(`Below is the match summary - 
             
             Played by - <@${match.currentInning % 2 !== 0 ? match.battingFirst.discordId : match.battingSecond.discordId}>
             
@@ -31,21 +29,18 @@ const endInnings = (interaction)=>{
             Ground: ${match.pitch}
             Team Playing Against: ${innings.country}
             IB Match Link: ${innings.matchLink}
-            Comment: ${match.comment}
+            Comment: ${match.comment || ''}
             `)
-            if((match.status !== MatchStatusEnum.COMPLETED && match.status !== MatchStatusEnum.ABANDONED)) {
-                switch (match.currentInning ){
-                    case 1:
-                        // interaction.channel.reply(`Its time for second inning <@${match.battingSecond.discordId}>, use /start-inning command to start your innings`)
-                        break
-                    case 2:
-                        // interaction.channel.reply(`Its time for third inning <@${match.battingFirst.discordId}>, use /start-inning command to start your innings`)
-                        break
-                    default:
-                        break
+
+            if(match.status === MatchStatusEnum.COMPLETED){
+                if(!match.result.isDraw){
+                    await interaction.followUp(`Congratulations <@${match.result.winner?.discordId}> for your win!!  <@${match.result.looser.discordId}> better luck next time`)
                 }
+                await interaction.followUp("This channel will be available for 24 more hours")
+                await interaction.followUp("Sending latest points table and fixture")
+                await getFixture(interaction)
             }
-        }
+
     }catch (e) {
         console.log("error" , e)
     }
