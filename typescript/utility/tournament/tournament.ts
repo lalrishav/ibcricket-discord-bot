@@ -3,6 +3,7 @@ import {ReadJsonFile, UpdateJsonFile} from "../file-operation";
 import {InitatePointsTable} from "../pointsTable/pointsTable";
 import {InitiateMatches} from "../matches/matches";
 
+const FILE_PATH = "tournament_base.json"
 export const InitiateTournament = (
   name: string,
   numberOfOvers: string,
@@ -28,7 +29,7 @@ export const InitiateTournament = (
 }
 
 export const start = (tournamentId: string): Tournament => {
-  const data: Tournament[] = ReadJsonFile("tournament.json") as Tournament[];
+  const data: Tournament[] = ReadJsonFile(FILE_PATH) as Tournament[];
   const index = data.findIndex((_) => _.tournamentId == tournamentId && _.status == TournamentStatus.YET_TO_START);
   if (index < 0) {
     throw new Error("No tournament found")
@@ -43,19 +44,19 @@ export const start = (tournamentId: string): Tournament => {
     data[index].status = TournamentStatus.IN_PROGRESS;
     data[index].pointsTable = pointsTable;
   }
-  UpdateJsonFile("tournament.json", data);
+  UpdateJsonFile(FILE_PATH, data);
   return data[index]
 };
 
 
 export const AddTournament = (tournament: Tournament) => {
-  const data = ReadJsonFile("tournament.json")
+  const data = ReadJsonFile(FILE_PATH)
   data.push(tournament)
-  UpdateJsonFile("tournament.json", data)
+  UpdateJsonFile(FILE_PATH, data)
 };
 
 export const UpdateTournament = (tournament: Tournament)=>{
-  const data = ReadJsonFile("tournament.json")
+  const data = ReadJsonFile(FILE_PATH)
   const index = data.findIndex((i: any) => i.tournamentId == tournament.tournamentId)
 
   if(index == -1){
@@ -63,13 +64,13 @@ export const UpdateTournament = (tournament: Tournament)=>{
   }
 
   data[index] = tournament
-  UpdateJsonFile("tournament.json", data)
+  UpdateJsonFile(FILE_PATH, data)
 }
 
 
 
 export const GetTournamentDetails = (tournamentId: string): Tournament => {
-  const data: Tournament[] = ReadJsonFile("tournament.json") as Tournament[];
+  const data: Tournament[] = ReadJsonFile(FILE_PATH) as Tournament[];
   const index = data.findIndex((_) => _.tournamentId == tournamentId);
   if (index < 0) {
     throw new Error("No tournament found")
@@ -79,7 +80,7 @@ export const GetTournamentDetails = (tournamentId: string): Tournament => {
 };
 
 export const GetAllTournaments = (): Tournament[] => {
-  return ReadJsonFile("tournament.json") as Tournament[];
+  return ReadJsonFile(FILE_PATH) as Tournament[];
 };
 
 export const GetNewTournamentId = (): string => {

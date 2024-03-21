@@ -6,7 +6,152 @@
     "typeOfPitch": "bounce",
     "status": "YET TO START",
     "players": [
+      {
+        "name": "lalrishav",
+        "discordId": "433712724753776651",
+        "discordUsername": "lalrishav"
+      },
+      {
+        "name": "01josesantander",
+        "discordId": "1220368005738008631",
+        "discordUsername": "01josesantander"
+      }
     ],
-    "matches": []
+    "matches": [
+      {
+        "matchId": "1",
+        "firstPlayer": {
+          "name": "lalrishav",
+          "discordId": "433712724753776651",
+          "discordUsername": "lalrishav"
+        },
+        "secondPlayer": {
+          "name": "josesantander",
+          "discordId": "1220368005738008631",
+          "discordUsername": "josesantander"
+        },
+        "pitch": "bounce",
+        "status": "COMPLETED",
+        "battingFirst": {
+          "name": "lalrishav",
+          "discordId": "433712724753776651",
+          "discordUsername": "lalrishav"
+        },
+        "startDate": "2024-03-21T18:40:09.973Z",
+        "currentInning": 4,
+        "totalOverRemaining": 70,
+        "firstInning": {
+          "inningId": "1",
+          "player": {
+            "name": "lalrishav",
+            "discordId": "433712724753776651",
+            "discordUsername": "lalrishav"
+          },
+          "runScored": 600,
+          "wicket": 10,
+          "overs": 50,
+          "qpNumber": "332",
+          "startDate": "2024-03-21T18:58:39.206Z",
+          "status": "COMPLETED",
+          "country": "aus",
+          "endDate": "2024-03-21T18:58:51.697Z",
+          "matchLink": "http"
+        },
+        "battingSecond": {
+          "name": "josesantander",
+          "discordId": "1220368005738008631",
+          "discordUsername": "josesantander"
+        },
+        "comment": "<@433712724753776651> won by 7 runs",
+        "secondInning": {
+          "inningId": "2",
+          "player": {
+            "name": "lalrishav",
+            "discordId": "433712724753776651",
+            "discordUsername": "lalrishav"
+          },
+          "runScored": 600,
+          "wicket": 10,
+          "overs": 60,
+          "qpNumber": "1234",
+          "startDate": "2024-03-21T18:59:05.107Z",
+          "status": "COMPLETED",
+          "country": "aus",
+          "endDate": "2024-03-21T18:59:14.642Z"
+        },
+        "thirdInning": {
+          "inningId": "3",
+          "player": {
+            "name": "lalrishav",
+            "discordId": "433712724753776651",
+            "discordUsername": "lalrishav"
+          },
+          "runScored": 50,
+          "wicket": 10,
+          "overs": 50,
+          "qpNumber": "4544",
+          "startDate": "2024-03-21T18:59:26.100Z",
+          "status": "COMPLETED",
+          "country": "wi",
+          "endDate": "2024-03-21T18:59:42.692Z"
+        },
+        "fourthInning": {
+          "inningId": "4",
+          "player": {
+            "name": "lalrishav",
+            "discordId": "433712724753776651",
+            "discordUsername": "lalrishav"
+          },
+          "runScored": 44,
+          "wicket": 4,
+          "overs": 10,
+          "qpNumber": "4543",
+          "startDate": "2024-03-21T19:00:11.670Z",
+          "status": "COMPLETED",
+          "country": "aus",
+          "endDate": "2024-03-21T19:27:43.339Z"
+        },
+        "endDate": "2024-03-21T19:27:43.339Z",
+        "result": {
+          "winner": {
+            "name": "lalrishav",
+            "discordId": "433712724753776651",
+            "discordUsername": "lalrishav"
+          },
+          "looser": {
+            "name": "josesantander",
+            "discordId": "1220368005738008631",
+            "discordUsername": "josesantander"
+          },
+          "comment": "<@433712724753776651> won by 7 runs",
+          "isLostByInnings": false,
+          "isDraw": false
+        }
+      }
+    ],
+    "startDate": "2024-03-21T18:33:33.312Z",
+    "pointsTable": {
+      "lalrishav": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      }
+    }
   }
 ]

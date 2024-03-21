@@ -11,9 +11,9 @@ const startInning = (interaction) => {
         const channelName = interaction.channel.name
 
 
-            const matchId = channelName.toString().split("-")[0]
+            const matchId = channelName.toString().split("-")[1]
             if (!matchId){
-                interaction.reply("something went wrong")
+                interaction.reply(`something went wrong or not correct channel for this command, channel name should start with match-<matchNumber>-<player2>-vs-</player2>`)
             }else{
                 const match = StartInning(matchId, country, stadium, qpNumber, discordUserId)
                 interaction.reply(`

@@ -4,6 +4,7 @@ exports.GetNewTournamentId = exports.GetAllTournaments = exports.GetTournamentDe
 const tournament_1 = require("../../dtos/tournament");
 const file_operation_1 = require("../file-operation");
 const pointsTable_1 = require("../pointsTable/pointsTable");
+const FILE_PATH = "tournament_base.json";
 const InitiateTournament = (name, numberOfOvers, typeOfPitch) => {
     const latestTournamentId = (0, exports.GetNewTournamentId)();
     if (latestTournamentId != "1") {
@@ -24,7 +25,7 @@ const InitiateTournament = (name, numberOfOvers, typeOfPitch) => {
 };
 exports.InitiateTournament = InitiateTournament;
 const start = (tournamentId) => {
-    const data = (0, file_operation_1.ReadJsonFile)("tournament.json");
+    const data = (0, file_operation_1.ReadJsonFile)(FILE_PATH);
     const index = data.findIndex((_) => _.tournamentId == tournamentId && _.status == tournament_1.TournamentStatus.YET_TO_START);
     if (index < 0) {
         throw new Error("No tournament found");
@@ -40,28 +41,28 @@ const start = (tournamentId) => {
         data[index].status = tournament_1.TournamentStatus.IN_PROGRESS;
         data[index].pointsTable = pointsTable;
     }
-    (0, file_operation_1.UpdateJsonFile)("tournament.json", data);
+    (0, file_operation_1.UpdateJsonFile)(FILE_PATH, data);
     return data[index];
 };
 exports.start = start;
 const AddTournament = (tournament) => {
-    const data = (0, file_operation_1.ReadJsonFile)("tournament.json");
+    const data = (0, file_operation_1.ReadJsonFile)(FILE_PATH);
     data.push(tournament);
-    (0, file_operation_1.UpdateJsonFile)("tournament.json", data);
+    (0, file_operation_1.UpdateJsonFile)(FILE_PATH, data);
 };
 exports.AddTournament = AddTournament;
 const UpdateTournament = (tournament) => {
-    const data = (0, file_operation_1.ReadJsonFile)("tournament.json");
+    const data = (0, file_operation_1.ReadJsonFile)(FILE_PATH);
     const index = data.findIndex((i) => i.tournamentId == tournament.tournamentId);
     if (index == -1) {
         throw new Error("no tournament found");
     }
     data[index] = tournament;
-    (0, file_operation_1.UpdateJsonFile)("tournament.json", data);
+    (0, file_operation_1.UpdateJsonFile)(FILE_PATH, data);
 };
 exports.UpdateTournament = UpdateTournament;
 const GetTournamentDetails = (tournamentId) => {
-    const data = (0, file_operation_1.ReadJsonFile)("tournament.json");
+    const data = (0, file_operation_1.ReadJsonFile)(FILE_PATH);
     const index = data.findIndex((_) => _.tournamentId == tournamentId);
     if (index < 0) {
         throw new Error("No tournament found");
@@ -72,7 +73,7 @@ const GetTournamentDetails = (tournamentId) => {
 };
 exports.GetTournamentDetails = GetTournamentDetails;
 const GetAllTournaments = () => {
-    return (0, file_operation_1.ReadJsonFile)("tournament.json");
+    return (0, file_operation_1.ReadJsonFile)(FILE_PATH);
 };
 exports.GetAllTournaments = GetAllTournaments;
 const GetNewTournamentId = () => {

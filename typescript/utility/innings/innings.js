@@ -71,7 +71,7 @@ const StartInning = (matchId, team, stadium, qpNumber, playerId, tournamentId = 
 };
 exports.StartInning = StartInning;
 const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tournamentId = "1") => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
     const tournament = (0, tournament_1.GetTournamentDetails)(tournamentId);
     let match = (0, matches_1.GetMatchDetails)(tournament, matchId);
     if (!match.status || match.status == match_1.MatchStatusEnum.ABANDONED || match.status == match_1.MatchStatusEnum.NOT_YET_STARTED || match.status == match_1.MatchStatusEnum.COMPLETED) {
@@ -98,13 +98,16 @@ const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tourname
                 firstInning.wicket = Number(wicket);
                 firstInning.matchLink = matchLink;
                 match.firstInning = firstInning;
+                let comment = "";
                 // @ts-ignore
-                match.totalOverRemaining = match.totalOverRemaining - Number(overs);
+                match.totalOverRemaining = match.totalOverRemaining - Math.ceil(Number(overs));
                 if (match.totalOverRemaining <= 0) {
                     match = (0, matches_1.EndMatch)(match, tournament, undefined, undefined, "Match Drawn", true);
+                    comment = "Match Drawn";
                     return { match: match, innings: firstInning };
-                    //todo - end match
                 }
+                comment = `<@${(_e = match.battingFirst) === null || _e === void 0 ? void 0 : _e.discordId}> scored ${score} runs`;
+                match.comment = comment;
                 (0, matches_1.UpdateMatch)(tournament, match);
                 return { match: match, innings: firstInning };
             }
@@ -126,11 +129,11 @@ const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tourname
                     comment = `<@${secondInning.player.discordId}> lead by ${runDiff} runs`;
                 }
                 else {
-                    comment = `<@${(_e = match.battingFirst) === null || _e === void 0 ? void 0 : _e.discordId}> lead by ${Math.abs(runDiff)} runs`;
+                    comment = `<@${(_f = match.battingFirst) === null || _f === void 0 ? void 0 : _f.discordId}> lead by ${Math.abs(runDiff)} runs`;
                 }
                 match.comment = comment;
                 // @ts-ignore
-                match.totalOverRemaining = match.totalOverRemaining - Number(overs);
+                match.totalOverRemaining = match.totalOverRemaining - Math.ceil(Number(overs));
                 if (match.totalOverRemaining <= 0) {
                     match = (0, matches_1.EndMatch)(match, tournament, undefined, undefined, "Match Drawn", true);
                     return { match: match, innings: secondInning };
@@ -140,7 +143,7 @@ const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tourname
             }
             break;
         case 3:
-            const thirdInning = match.firstInning;
+            const thirdInning = match.thirdInning;
             if (thirdInning) {
                 thirdInning.status = inning_1.InningStatus.COMPLETED;
                 thirdInning.endDate = new Date();
@@ -150,21 +153,23 @@ const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tourname
                 match.thirdInning = thirdInning;
                 let comment = "NA";
                 // @ts-ignore
-                match.totalOverRemaining = match.totalOverRemaining - Number(overs);
+                match.totalOverRemaining = match.totalOverRemaining - Math.ceil(Number(overs));
                 // @ts-ignore
-                const firstTwoInningDiff = ((_f = match.secondInning) === null || _f === void 0 ? void 0 : _f.runScored) - ((_g = match.firstInning) === null || _g === void 0 ? void 0 : _g.runScored);
+                const firstTwoInningDiff = ((_g = match.secondInning) === null || _g === void 0 ? void 0 : _g.runScored) - ((_h = match.firstInning) === null || _h === void 0 ? void 0 : _h.runScored);
+                console.log("firstTwoInningDiff", firstTwoInningDiff);
+                console.log("third innings score", thirdInning.runScored);
                 if (firstTwoInningDiff > 0) {
                     //that mean there is a possibility of losing the match by innings
                     if (thirdInning.runScored < firstTwoInningDiff) {
-                        match = (0, matches_1.EndMatch)(match, tournament, match.battingSecond, match.battingFirst, `${(_h = match.battingSecond) === null || _h === void 0 ? void 0 : _h.discordUsername} won by innings and ${firstTwoInningDiff - thirdInning.runScored} runs`, false, true);
+                        match = (0, matches_1.EndMatch)(match, tournament, match.battingSecond, match.battingFirst, `${(_j = match.battingSecond) === null || _j === void 0 ? void 0 : _j.discordUsername} won by innings and ${firstTwoInningDiff - thirdInning.runScored} runs`, false, true);
                         return { match: match, innings: thirdInning };
                     }
                     else {
-                        comment = `<@${(_j = match.battingSecond) === null || _j === void 0 ? void 0 : _j.discordId}> need ${thirdInning.runScored - firstTwoInningDiff} to win`;
+                        comment = `<@${(_k = match.battingSecond) === null || _k === void 0 ? void 0 : _k.discordId}> need ${thirdInning.runScored - firstTwoInningDiff} to win`;
                     }
                 }
                 else {
-                    comment = `<@${(_k = match.battingSecond) === null || _k === void 0 ? void 0 : _k.discordId}> need ${thirdInning.runScored - firstTwoInningDiff} to win`;
+                    comment = `<@${(_l = match.battingSecond) === null || _l === void 0 ? void 0 : _l.discordId}> need ${thirdInning.runScored - firstTwoInningDiff} to win`;
                 }
                 match.comment = comment;
                 if (match.totalOverRemaining <= 0) {
@@ -185,18 +190,18 @@ const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tourname
                 fourthInnings.wicket = Number(wicket);
                 match.fourthInning = fourthInnings;
                 // @ts-ignore
-                match.totalOverRemaining = match.totalOverRemaining - Number(overs);
+                match.totalOverRemaining = match.totalOverRemaining - Math.ceil(Number(overs));
                 // @ts-ignore
-                const runToWin = (((_l = match.firstInning) === null || _l === void 0 ? void 0 : _l.runScored) + ((_m = match.thirdInning) === null || _m === void 0 ? void 0 : _m.runScored)) - ((_o = match.secondInning) === null || _o === void 0 ? void 0 : _o.runScored) + 1;
+                const runToWin = (((_m = match.firstInning) === null || _m === void 0 ? void 0 : _m.runScored) + ((_o = match.thirdInning) === null || _o === void 0 ? void 0 : _o.runScored)) - ((_p = match.secondInning) === null || _p === void 0 ? void 0 : _p.runScored) + 1;
                 let comment = "NA";
                 if (fourthInnings.runScored > runToWin) {
-                    comment = `<@${(_p = match.battingSecond) === null || _p === void 0 ? void 0 : _p.discordId}> won by ${10 - Number(wicket)} wicket`;
+                    comment = `<@${(_q = match.battingSecond) === null || _q === void 0 ? void 0 : _q.discordId}> won by ${10 - Number(wicket)} wicket`;
                     match = (0, matches_1.EndMatch)(match, tournament, match.battingSecond, match.battingFirst, comment, false);
                     return { match: match, innings: fourthInnings };
                 }
                 else if (fourthInnings.runScored < runToWin) {
-                    if (Number(wicket) == 10) {
-                        comment = `<@${(_q = match.battingFirst) === null || _q === void 0 ? void 0 : _q.discordId}> won by ${runToWin - fourthInnings.runScored} runs`;
+                    if (match.totalOverRemaining > 0) {
+                        comment = `<@${(_r = match.battingFirst) === null || _r === void 0 ? void 0 : _r.discordId}> won by ${runToWin - fourthInnings.runScored} runs`;
                         match = (0, matches_1.EndMatch)(match, tournament, match.battingFirst, match.battingSecond, comment, false);
                         return { match: match, innings: fourthInnings };
                     }

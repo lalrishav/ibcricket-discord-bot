@@ -33,14 +33,14 @@ client.on("ready", (c) => {
     if(channel){
       const halfWayIndex = Math.ceil(tournament.matches.length / 2);
 
-      for (let i = 0; i < tournament.matches.length; i++) {
-        const match = tournament.matches[i];
-
-        const category = i < halfWayIndex ? "1220422570550104094" : "1220422570550104094";
-        const channelName = `match-${match.matchId}- ${match.firstPlayer.name}-vs-${match.secondPlayer.name}`
-        const newChannel = await createChannel(client, channelName, category)
-        await newChannel.send(`Welcome <@${match.firstPlayer.discordId}> and <@${match.secondPlayer.discordId}> this is your channel which you will use for this match, Toss have to be accommodated manually right now using https://cointoss.studio91media.co.uk/, player who will bat first use /start-innings <england> <stadium-2> <qpNumber> to start your innings, once completed you can use /end-innings <score> <overs> <profileLink>  to end your innings. If facing any issue or bot is offline please proceed manually.`)
-      }
+      // for (let i = 0; i < tournament.matches.length; i++) {
+      //   const match = tournament.matches[i];
+      //
+      //   const category = i < halfWayIndex ? "1220422570550104094" : "1220422570550104094";
+      //   const channelName = `match-${match.matchId}- ${match.firstPlayer.name}-vs-${match.secondPlayer.name}`
+      //   const newChannel = await createChannel(client, channelName, category)
+      //   await newChannel.send(`Welcome <@${match.firstPlayer.discordId}> and <@${match.secondPlayer.discordId}> this is your channel which you will use for this match, Toss have to be accommodated manually right now using https://cointoss.studio91media.co.uk/, player who will bat first use /start-innings <england> <stadium-2> <qpNumber> to start your innings, once completed you can use /end-innings <score> <overs> <profileLink>  to end your innings. If facing any issue or bot is offline please proceed manually.`)
+      // }
     }
   })
 });
