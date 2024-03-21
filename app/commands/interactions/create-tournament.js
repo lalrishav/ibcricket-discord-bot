@@ -11,7 +11,7 @@ const createTournament = (interaction) => {
     interaction.reply(
         `Your tournament id is - ${tournamentId}, type add-players and  tag all the players of the tournament`)
   }catch (e){
-    console.log(e);
+    interaction.reply(e.message)
   }
 };
 

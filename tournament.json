@@ -7,6 +7,11 @@
     "status": "IN PROGRESS",
     "players": [
       {
+        "name": "01josesantander",
+        "discordId": "1220368005738008631",
+        "discordUsername": "01josesantander"
+      },
+      {
         "name": "lalrishav",
         "discordId": "433712724753776651",
         "discordUsername": "lalrishav"
@@ -21,6 +26,36 @@
       {
         "matchId": "1",
         "firstPlayer": {
+          "name": "01josesantander",
+          "discordId": "1220368005738008631",
+          "discordUsername": "01josesantander"
+        },
+        "secondPlayer": {
+          "name": "lalrishav",
+          "discordId": "433712724753776651",
+          "discordUsername": "lalrishav"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "2",
+        "firstPlayer": {
+          "name": "01josesantander",
+          "discordId": "1220368005738008631",
+          "discordUsername": "01josesantander"
+        },
+        "secondPlayer": {
+          "name": "ibcricket-bot",
+          "discordId": "1219427646212145204",
+          "discordUsername": "ibcricket-bot"
+        },
+        "pitch": "bounce",
+        "status": "NOT_YET_STARTED"
+      },
+      {
+        "matchId": "3",
+        "firstPlayer": {
           "name": "lalrishav",
           "discordId": "433712724753776651",
           "discordUsername": "lalrishav"
@@ -31,19 +66,32 @@
           "discordUsername": "ibcricket-bot"
         },
         "pitch": "bounce",
-        "status": "INITIATED",
-        "battingFirst": {
-          "name": "lalrishav",
-          "discordId": "433712724753776651",
-          "discordUsername": "lalrishav"
-        },
-        "startDate": "2024-03-21T13:21:34.706Z",
-        "currentInning": 0,
-        "totalOverRemaining": 240
+        "status": "NOT_YET_STARTED"
       }
     ],
-    "startDate": "2024-03-21T13:21:12.228Z",
+    "startDate": "2024-03-21T13:57:38.827Z",
     "pointsTable": {
+      "01josesantander": {
+        "totalMatchesPlayed": 0,
+        "totalInningsPlayed": 0,
+        "totalMatchesWin": 0,
+        "totalMatchesLost": 0,
+        "totalMatchesDrawn": 0,
+        "winPoints": 0,
+        "bonusPoints": 0,
+        "totalPoints": 0,
+        "totalRuns": 0,
+        "totalWickets": 0,
+        "totalOver": 0,
+        "average": 0,
+        "opponentRuns": 0,
+        "opponentOvers": 0,
+        "opponentWicket": 0,
+        "runRate": 0,
+        "strikeRate": 0,
+        "averageOverPerInnings": 0,
+        "maxScorePossible": 0
+      },
       "lalrishav": {
         "totalMatchesPlayed": 0,
         "totalInningsPlayed": 0,

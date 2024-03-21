@@ -12,7 +12,7 @@ const getFixture = async (interaction)=>{
             files: [{ attachment: screenshot, name: "screenshot.png" }],
         })
     }catch (e){
-        console.log(e.message)
+        interaction.reply(e.message)
     }
 }
 

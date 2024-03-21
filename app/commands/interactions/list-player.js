@@ -7,7 +7,7 @@ const listPlayers = (interaction)=>{
         const userMentionsByUsername = usernames.map(username => `<@${username}>`).join(' ');
         interaction.reply(`Player list:   ${userMentionsByUsername}`);
     }catch (e) {
-        console.log(e)
+        interaction.reply(e.message)
         //todo
     }
 }

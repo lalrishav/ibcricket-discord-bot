@@ -68,7 +68,7 @@ export const StartMatch = (
     const tournament = GetTournamentDetails(tournamentId)
     const match = GetMatchDetails(tournament, matchId);
     if (match.status != MatchStatusEnum.NOT_YET_STARTED) {
-        throw new Error("match is already started")
+        throw new Error("match is already started or not available pls check your match id once.")
     }
     let battingFirstDiscordId: string;
     battingFirstDiscordId = playerId;

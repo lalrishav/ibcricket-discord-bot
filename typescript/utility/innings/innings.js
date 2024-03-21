@@ -25,8 +25,8 @@ const StartInning = (matchId, team, stadium, qpNumber, playerId, tournamentId = 
     var _a, _b, _c, _d;
     const tournament = (0, tournament_1.GetTournamentDetails)(tournamentId);
     const match = (0, matches_1.GetMatchDetails)(tournament, matchId);
-    if (match.status == match_1.MatchStatusEnum.ABANDONED || match.status == match_1.MatchStatusEnum.NOT_YET_STARTED || match.status == match_1.MatchStatusEnum.COMPLETED) {
-        throw new Error("can not start innings , match status " + match.status.toString());
+    if (!match.status || match.status == match_1.MatchStatusEnum.ABANDONED || match.status == match_1.MatchStatusEnum.NOT_YET_STARTED || match.status == match_1.MatchStatusEnum.COMPLETED) {
+        throw new Error("can not start innings , match status " + (match === null || match === void 0 ? void 0 : match.status) || 'NOT YET STARTED');
     }
     if (match.firstPlayer.discordId != playerId && match.secondPlayer.discordId != playerId) {
         throw new Error("Only players of this match are allowed to start innings");
@@ -74,8 +74,8 @@ const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tourname
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
     const tournament = (0, tournament_1.GetTournamentDetails)(tournamentId);
     let match = (0, matches_1.GetMatchDetails)(tournament, matchId);
-    if (match.status == match_1.MatchStatusEnum.ABANDONED || match.status == match_1.MatchStatusEnum.NOT_YET_STARTED || match.status == match_1.MatchStatusEnum.COMPLETED) {
-        throw new Error("can not start innings , match status " + match.status.toString());
+    if (!match.status || match.status == match_1.MatchStatusEnum.ABANDONED || match.status == match_1.MatchStatusEnum.NOT_YET_STARTED || match.status == match_1.MatchStatusEnum.COMPLETED) {
+        throw new Error("can not start innings , match status " + (match === null || match === void 0 ? void 0 : match.status) || 'NOT YET STARTED');
     }
     if (match.firstPlayer.discordId != playerId && match.secondPlayer.discordId != playerId) {
         throw new Error("Only players of this match are allowed to start innings");
@@ -223,6 +223,7 @@ const getInnings = (inningId, qpNumber, player, team, tournamentId = "1") => {
         qpNumber: qpNumber,
         startDate: new Date(),
         status: inning_1.InningStatus.IN_PROGRESS,
+        country: team
     };
 };
 const EndFirstInnings = () => {

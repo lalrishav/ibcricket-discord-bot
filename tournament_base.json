@@ -1,0 +1,12 @@
+[
+  {
+    "tournamentId": "1",
+    "name": "ibc 2",
+    "numberOfOvers": "unlimited",
+    "typeOfPitch": "bounce",
+    "status": "YET TO START",
+    "players": [
+    ],
+    "matches": []
+  }
+]

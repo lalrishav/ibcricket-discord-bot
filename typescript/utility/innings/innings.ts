@@ -25,9 +25,8 @@ export const StartInning = (matchId: string, team: string, stadium: string, qpNu
 
     const tournament = GetTournamentDetails(tournamentId)
     const match = GetMatchDetails(tournament, matchId)
-
-    if (match.status == MatchStatusEnum.ABANDONED || match.status == MatchStatusEnum.NOT_YET_STARTED || match.status == MatchStatusEnum.COMPLETED ){
-        throw new Error ("can not start innings , match status " + match.status.toString())
+    if (!match.status || match.status == MatchStatusEnum.ABANDONED || match.status == MatchStatusEnum.NOT_YET_STARTED || match.status == MatchStatusEnum.COMPLETED ){
+        throw new Error ("can not start innings , match status " + match?.status || 'NOT YET STARTED')
     }
 
     if (match.firstPlayer.discordId != playerId && match.secondPlayer.discordId != playerId) {
@@ -83,8 +82,8 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
     const tournament = GetTournamentDetails(tournamentId)
     let match = GetMatchDetails(tournament, matchId)
 
-    if (match.status == MatchStatusEnum.ABANDONED || match.status == MatchStatusEnum.NOT_YET_STARTED || match.status == MatchStatusEnum.COMPLETED ){
-        throw new Error ("can not start innings , match status " + match.status.toString())
+    if (!match.status || match.status == MatchStatusEnum.ABANDONED || match.status == MatchStatusEnum.NOT_YET_STARTED || match.status == MatchStatusEnum.COMPLETED ){
+        throw new Error ("can not start innings , match status " + match?.status || 'NOT YET STARTED')
     }
 
     if (match.firstPlayer.discordId != playerId && match.secondPlayer.discordId != playerId) {
@@ -242,6 +241,7 @@ const getInnings = (inningId: string, qpNumber: string, player: Player,team:stri
         qpNumber: qpNumber,
         startDate: new Date(),
         status: InningStatus.IN_PROGRESS,
+        country: team
     }
 }
 

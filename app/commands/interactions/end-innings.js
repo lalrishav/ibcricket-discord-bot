@@ -28,7 +28,7 @@ const endInnings = async (interaction, appEmitter)=>{
             Total Over remaining: ${match.totalOverRemaining}
             Ground: ${match.pitch}
             Team Playing Against: ${innings.country}
-            IB Match Link: ${innings.matchLink}
+            IB Match Link: ${innings.matchLink || ''}
             Comment: ${match.comment || ''}
             `)
 
@@ -42,7 +42,7 @@ const endInnings = async (interaction, appEmitter)=>{
             }
 
     }catch (e) {
-        console.log("error" , e)
+        interaction.reply(e.message)
     }
 }
 
