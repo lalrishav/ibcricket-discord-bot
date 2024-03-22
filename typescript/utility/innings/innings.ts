@@ -43,6 +43,7 @@ export const StartInning = (matchId: string, team: string, stadium: string, qpNu
 
 
     match.currentInning = (match.currentInning || 0) + 1
+    match.stadium = stadium
     const player = GetPlayerByTournamentIdAndPlayerId(tournamentId, playerId)
 
 
@@ -109,6 +110,7 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
                 firstInning.runScored = Number(score)
                 firstInning.wicket = Number(wicket)
                 firstInning.matchLink = matchLink
+                match.pitch
                 match.firstInning = firstInning
                 let comment = ""
                 // @ts-ignore

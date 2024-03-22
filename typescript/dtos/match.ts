@@ -18,7 +18,8 @@ export type Match = {
     result?: MatchResult,
     currentInning? : number,
     totalOverRemaining?: number,
-    comment?: string
+    comment?: string,
+    stadium?: string,
 }
 
 export enum MatchStatusEnum {

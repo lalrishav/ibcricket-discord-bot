@@ -26,7 +26,7 @@ const endInnings = async (interaction, appEmitter)=>{
             Wickets: ${innings.wicket}
             Overs: ${innings.overs}
             Total Over remaining: ${match.totalOverRemaining}
-            Ground: ${match.pitch}
+            Ground: ${match.stadium}
             Team Playing Against: ${innings.country}
             IB Match Link: ${innings.matchLink || ''}
             Comment: ${match.comment || ''}

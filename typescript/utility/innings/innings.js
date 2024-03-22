@@ -38,6 +38,7 @@ const StartInning = (matchId, team, stadium, qpNumber, playerId, tournamentId = 
         throw new Error("match is already completed");
     }
     match.currentInning = (match.currentInning || 0) + 1;
+    match.stadium = stadium;
     const player = (0, players_1.GetPlayerByTournamentIdAndPlayerId)(tournamentId, playerId);
     switch (match.currentInning) {
         case 1:
@@ -97,6 +98,7 @@ const EndInnings = (matchId, playerId, score, overs, wicket, matchLink, tourname
                 firstInning.runScored = Number(score);
                 firstInning.wicket = Number(wicket);
                 firstInning.matchLink = matchLink;
+                match.pitch;
                 match.firstInning = firstInning;
                 let comment = "";
                 // @ts-ignore

@@ -4,7 +4,7 @@
     "name": "ibc 2",
     "numberOfOvers": "unlimited",
     "typeOfPitch": "bounce",
-    "status": "YET TO START",
+    "status": "IN PROGRESS",
     "players": [
       {
         "name": "rot9999",
@@ -81,7 +81,38 @@
           "discordUsername": "iceman"
         },
         "pitch": "bounce",
-        "status": "NOT_YET_STARTED"
+        "status": "FIRST_INNING_IN_PROGRESS",
+        "battingFirst": {
+          "name": "rot9999",
+          "discordId": "1129416139622068326",
+          "discordUsername": "rot9999"
+        },
+        "startDate": "2024-03-21T21:31:38.802Z",
+        "currentInning": 1,
+        "totalOverRemaining": 157,
+        "firstInning": {
+          "inningId": "1",
+          "player": {
+            "name": "rot9999",
+            "discordId": "1129416139622068326",
+            "discordUsername": "rot9999"
+          },
+          "runScored": 308,
+          "wicket": 10,
+          "overs": 82.5,
+          "qpNumber": "256",
+          "startDate": "2024-03-21T21:31:59.086Z",
+          "status": "COMPLETED",
+          "country": "wi",
+          "endDate": "2024-03-21T23:20:15.194Z",
+          "matchLink": "https://profile.ib.cricket/profile/match-details/12d820ee-b783-4d62-9e7d-505012731678"
+        },
+        "battingSecond": {
+          "name": "iceman",
+          "discordId": "923833652675239969",
+          "discordUsername": "iceman"
+        },
+        "comment": "<@1129416139622068326> scored 308 runs"
       },
       {
         "matchId": "2",
@@ -156,7 +187,38 @@
           "discordUsername": "iceman"
         },
         "pitch": "bounce",
-        "status": "NOT_YET_STARTED"
+        "status": "FIRST_INNING_IN_PROGRESS",
+        "battingFirst": {
+          "name": "iceman",
+          "discordId": "923833652675239969",
+          "discordUsername": "iceman"
+        },
+        "startDate": "2024-03-21T21:10:52.772Z",
+        "currentInning": 1,
+        "totalOverRemaining": 216,
+        "firstInning": {
+          "inningId": "1",
+          "player": {
+            "name": "iceman",
+            "discordId": "923833652675239969",
+            "discordUsername": "iceman"
+          },
+          "runScored": 242,
+          "wicket": 10,
+          "overs": 23.5,
+          "qpNumber": "341",
+          "startDate": "2024-03-21T21:11:53.099Z",
+          "status": "COMPLETED",
+          "country": "wi",
+          "endDate": "2024-03-21T22:04:38.554Z",
+          "matchLink": "https://profile.ib.cricket/profile/match-details/3ec4b5d7-585f-4a7d-a575-f0a08eeaf79a?matchDetailsTabs=0"
+        },
+        "battingSecond": {
+          "name": "karthik",
+          "discordId": "533319320932188171",
+          "discordUsername": "karthik"
+        },
+        "comment": "<@923833652675239969> scored 242 runs"
       },
       {
         "matchId": "9",
