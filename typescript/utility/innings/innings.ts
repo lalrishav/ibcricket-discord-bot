@@ -180,10 +180,10 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
                         match = EndMatch(match, tournament, match.battingSecond, match.battingFirst, `${match.battingSecond?.discordUsername} won by innings and ${firstTwoInningDiff - thirdInning.runScored} runs`, false, true)
                         return {match:match, innings: thirdInning}
                     }else{
-                        comment = `<@${match.battingSecond?.discordId}> need ${thirdInning.runScored - firstTwoInningDiff} to win`
+                        comment = `<@${match.battingSecond?.discordId}> need ${thirdInning.runScored - firstTwoInningDiff + 1} to win`
                     }
                 }else{
-                    comment = `<@${match.battingSecond?.discordId}> need ${thirdInning.runScored - firstTwoInningDiff} to win`
+                    comment = `<@${match.battingSecond?.discordId}> need ${thirdInning.runScored - firstTwoInningDiff + 1} to win`
                 }
                 match.comment = comment
 
@@ -212,7 +212,7 @@ export const EndInnings = (matchId: string,playerId: string, score: string, over
                 // @ts-ignore
                 const runToWin = (match.firstInning?.runScored + match.thirdInning?.runScored) - match.secondInning?.runScored + 1
                 let comment = "NA"
-                if (fourthInnings.runScored > runToWin){
+                if (fourthInnings.runScored >= runToWin){
                     comment = `<@${match.battingSecond?.discordId}> won by ${10 - Number(wicket)} wicket`
                     match = EndMatch(match, tournament, match.battingSecond, match.battingFirst, comment, false)
                     return {match:match, innings: fourthInnings}
